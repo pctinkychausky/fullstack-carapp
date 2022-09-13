@@ -1,0 +1,39 @@
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-block: 30px;
+  width: 30%;
+  margin-inline: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  color: #2d294b;
+}
+.summary-container {
+  padding-block-end: 40px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-inline: 80px;
+  padding-top: 25px;
+}
+
+.booking-summary {
+  text-align: left;
+}
+
+.booking-title {
+  padding-block: 10px;
+  text-align: left;
+  padding-left: 30px;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+}
+.summary-top {
+  padding-bottom: 10px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.summary-bottom {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

@@ -1,0 +1,201 @@
+.master-container {
+  background-color: #f4f3f3;
+}
+
+.CarListContainer {
+  display: grid;
+  height: 100%;
+  width: 60%;
+  grid-template-areas:
+    "carName carName carName sidebar-top"
+    "carImage policy1 extra sidebar-bottom"
+    "carImage policy2 extra sidebar-bottom"
+    "carImage policy3 extra sidebar-bottom"
+    "carImage policy4 extra sidebar-bottom";
+  grid-template-columns: 1.1fr 1fr 1fr 0.7fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  margin-inline: 20%;
+  margin-block: 50px;
+}
+
+.ClearSans {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  color: #2d294b;
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.LeagueSpartan {
+  font-family: "League Spartan", sans-serif;
+  color: #2d294b;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.header-bar {
+  background-color: white;
+  z-index: 2;
+  color: #2d294b;
+  grid-area: carName;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px 0 0 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.policy {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  padding-top: 10px;
+}
+
+.header-bar > h3 {
+  margin-block: 0;
+}
+
+#dollar-logo {
+  width: 100%;
+  height: 100%;
+}
+
+.logo-bar {
+  padding-inline-end: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 17rem;
+}
+
+#sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 28px;
+}
+
+#sidebar-bottom {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.booking-email {
+  padding: 5px;
+  background-color: #18a969;
+  color: #fff;
+
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.booking-click {
+  background-color: #2fec87;
+  padding: 17px 25px 13px 25px;
+  border: none;
+  border-radius: 5px;
+  font-family: "League Spartan", Arial, Helvetica;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 70%;
+  margin: 0 0 10px 0;
+}
+
+#image {
+  object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
+  border-radius: 0 0 0 8px;
+}
+
+#carImage {
+  background-color: white;
+  grid-area: carImage;
+  border: 1px solid #e1e1e1;
+  border-radius: 0 0 0 8px;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1140px) {
+  #carImage {
+    max-width: 75%;
+  }
+}
+
+#sidebar-top {
+  background-color: #2d294b;
+  grid-area: sidebar-top;
+  border-radius: 0 8px 0 0;
+}
+
+#sidebar-bottom {
+  background-color: #57536f;
+  grid-area: sidebar-bottom;
+  border-radius: 0 0 8px 0;
+}
+
+#policy1 {
+  background-color: white;
+  grid-area: policy1;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+#policy2 {
+  background-color: white;
+  grid-area: policy2;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+#policy3 {
+  background-color: white;
+  grid-area: policy3;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+#policy4 {
+  background-color: white;
+  grid-area: policy4;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+#extra {
+  background-color: white;
+  grid-area: extra;
+  border: 1px solid #e1e1e1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.OnlyWithZest-top {
+  list-style: none;
+  text-align: left;
+  padding-right: 5px;
+  line-height: 22px;
+  text-indent: -32px;
+  margin-left: 20px;
+}
+
+.car-name {
+  margin-left: 25px;
+  padding-top: 8px;
+}

@@ -1,0 +1,16 @@
+.master-newsletter-container {
+  width: 100vw;
+  height: 20vh;
+  background-color: #0971f1;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  font-weight: bold;
+}
+
+.newsletter-container p {
+  margin-top: -20px;
+}

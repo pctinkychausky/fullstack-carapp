@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Homepage</h1>
+    <div id="test"></div>
+    <script>
+      const mytest = document.getElementById("test");
+
+      const fetchCars = async () => {
+        try {
+          const response = await fetch("http://localhost:3000/api/v1/cars/");
+          if (!response.ok) throw response;
+          const data = await response.json();
+          const mydata = JSON.stringify(data);
+          mytest.innerHTML = `${mydata}`;
+
+          console.log(
+            "🚀 ~ file: index.html ~ line 17 ~ fetchCars ~ data",
+            data
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchCars();
+    </script>
+  </body>
+</html>
