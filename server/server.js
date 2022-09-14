@@ -58,6 +58,16 @@ app.get("/api/v1/cars", (req, res, next) => {
   });
 });
 
+app.get("/api/v1/cars/:id?", (req, res, next) => {
+  const carId = req.params.id;
+
+  Car.findById({ _id: carId }).exec((err, car) => {
+    if (err) return res.status(500).send(err);
+
+    res.status(200).json(car);
+  });
+});
+
 app.post("/api/v1/cars", (req, res, next) => {
   console.log(req.body);
   const newCar = new Car(req.body);

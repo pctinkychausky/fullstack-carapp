@@ -16,7 +16,7 @@
 
       const fetchCars = async () => {
         try {
-          const response = await fetch("http://localhost:3000/api/v1/cars/");
+          const response = await fetch("http://localhost:6001/api/v1/cars/");
           if (!response.ok) throw response;
           const data = await response.json();
           const mydata = JSON.stringify(data);
