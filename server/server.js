@@ -1,8 +1,9 @@
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
+import findConfig from "find-config";
 
-dotenv.config();
+dotenv.config({ path: findConfig(".env") });
 const app = express();
 
 const { PORT = 3333, MONGODB_URI = "mongodb://localhost:27017/car-rental" } =
