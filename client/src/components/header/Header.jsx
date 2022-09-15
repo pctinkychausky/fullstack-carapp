@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./header.css";
+import { useAuth0 } from "@auth0/auth0-react";
 import BasicDatePicker from "./BasicDatePicker/BasicDatePicker";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
@@ -7,17 +8,23 @@ import { useNavigate } from "react-router-dom";
 import { CarsContext } from "../context/cars.Context";
 
 function Header() {
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
   const { setFilterCity, availableCities } = useContext(CarsContext);
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const navigate = useNavigate();
 
   const submit = () => {
-    navigate("/carhire", { replace: true });
-    setFilterCity(searchKeyword);
+    if (isAuthenticated) {
+      navigate("/carhire", { replace: true });
+      setFilterCity(searchKeyword);
+    } else {
+      loginWithRedirect();
+    }
   };
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
   return (
     <>
       <div className="headerSearch">
@@ -68,14 +75,16 @@ function Header() {
                     <Checkbox {...label} defaultChecked />
                     Driver aged between 25-75
                   </div>
-                  <Button
-                    onClick={submit}
-                    variant="contained"
-                    size="large"
-                    className="search-button"
-                  >
-                    Search
-                  </Button>
+                  <div>
+                    <Button
+                      onClick={submit}
+                      variant="contained"
+                      size="large"
+                      className="search-button"
+                    >
+                      Search
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
