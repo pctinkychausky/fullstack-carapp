@@ -5,21 +5,23 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Auth0Provider } from "@auth0/auth0-react";
+import findConfig from "find-config";
 
-// const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-// const clientID = process.env.REACT_APP_AUTH0_CLIENT_ID;
+dotenv.config({ path: findConfig(".env") });
+
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientID = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Auth0Provider
-      domain="dev-8mshccfr.us.auth0.com"
-      clientId="YF5ryKC7mJQG1z4TxBM1mHEWXwbYDWUF"
+      domain={domain}
+      clientId={clientID}
       redirectUri={window.location.origin}
     >
       <App />
     </Auth0Provider>
-    ,
   </React.StrictMode>
 );
 
