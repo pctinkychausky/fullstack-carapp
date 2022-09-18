@@ -8,7 +8,6 @@ function Carhire() {
     <>
       <Navbar />
       <ProductList />
-
       <Footer />
     </>
   );

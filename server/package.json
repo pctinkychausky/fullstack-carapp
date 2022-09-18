@@ -13,18 +13,20 @@
   "license": "ISC",
   "dependencies": {
     "@auth0/auth0-react": "^1.11.0",
-    "express-jwt": "^7.7.5",
-    "cors": "^2.8.5",
     "compression": "^1.7.4",
+    "concurrently": "^7.4.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
+    "express-jwt": "^7.7.5",
     "find-config": "^1.0.0",
+    "fullstack-carapp": "file:..",
     "mongoose": "^6.6.0",
     "path": "^0.12.7",
     "resolve-path": "^1.4.0"
   },
   "devDependencies": {
-    "webpack-cli": "^3.3.12",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "webpack-cli": "^3.3.12"
   }
 }

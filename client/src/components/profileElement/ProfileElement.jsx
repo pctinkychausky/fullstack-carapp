@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-
 import Highlight from "./Highlight.js";
 
 import { useAuth0 } from "@auth0/auth0-react";

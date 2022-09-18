@@ -16,8 +16,8 @@ import {
 const router = express.Router();
 
 router
-  .get("/:id?", getCar)
   .get("/", getCars)
+  .get("/:id?", getCar)
   .post("/", addCar)
   .put("/:id", updateCar)
   .delete("/:id", removeCar);
