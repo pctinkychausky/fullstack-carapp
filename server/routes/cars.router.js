@@ -3,7 +3,7 @@ import express from "express";
 
 import {
   getCar,
-  getAllCars,
+  getCars,
   addCar,
   updateCar,
   removeCar,
@@ -17,7 +17,7 @@ const router = express.Router();
 
 router
   .get("/:id?", getCar)
-  .get("/", getAllCars)
+  .get("/", getCars)
   .post("/", addCar)
   .put("/:id", updateCar)
   .delete("/:id", removeCar);

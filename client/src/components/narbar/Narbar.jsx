@@ -14,6 +14,7 @@ import "./navbar.css";
 import { NavLink } from "react-router-dom";
 import LoginButton from "../loginButton/LoginButton";
 import LogoutButton from "../logoutButton/LogoutButton";
+import LogBar from "../../components/logBar/LogBar";
 
 function Narbar() {
   const theme = createTheme({
@@ -40,11 +41,19 @@ function Narbar() {
     paddingLeft: "0px",
   };
 
+  const styles2 = {
+    paddingTop: "10px",
+  };
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <ThemeProvider theme={theme}>
-          <AppBar position="relative" color="white" sx={{ px: 8, height: 115 }}>
+          <AppBar
+            position="relative"
+            color="white"
+            sx={{ py: 2, px: 8, height: 135 }}
+          >
             <Toolbar
               sx={{
                 display: "flex",
@@ -78,8 +87,9 @@ function Narbar() {
                   £ GBP
                 </Button>
                 <span>
-                  <LoginButton />
-                  <LogoutButton />
+                  <LogBar />
+                  {/* <LoginButton />
+                  <LogoutButton /> */}
                 </span>
               </Typography>
             </Toolbar>
@@ -107,6 +117,7 @@ function Narbar() {
               </Stack>
             </div>
           </AppBar>
+
           <Stack spacing={1}>
             <Button
               color="primary"

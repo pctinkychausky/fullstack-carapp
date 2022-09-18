@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "reactstrap": "^8.0",
     "@auth0/auth0-react": "^1.11.0",
     "@date-io/date-fns": "^2.14.0",
     "@devexpress/dx-react-core": "^3.0.3",
