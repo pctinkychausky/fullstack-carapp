@@ -1,11 +1,10 @@
 import * as url from "url";
+import app from "./server.js";
 import dotenv from "dotenv";
 import "dotenv/config";
 import findConfig from "find-config";
 
 dotenv.config({ path: findConfig(".env") });
-
-import app from "./server.js";
 
 const { PORT = 6001 } = process.env;
 

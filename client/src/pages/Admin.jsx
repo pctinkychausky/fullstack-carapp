@@ -2,25 +2,25 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/narbar/Narbar";
-import removeCar from "../../../server/controllers/cars.controller";
+import CarList from "./Cars/CarList";
 
 function Admin() {
-  const [productsList, setProductsList] = useState([]);
+  // const [productsList, setProductsList] = useState([]);
 
-  useEffect(() => {
-    Axios.get("http://localhost:6001/api/v1/cars/").then((response) => {
-      console.log(
-        "🚀 ~ file: Admin.jsx ~ line 11 ~ Axios.get ~ response",
-        response
-      );
+  // useEffect(() => {
+  //   Axios.get("http://localhost:6001/api/v1/cars/").then((response) => {
+  //     console.log(
+  //       "🚀 ~ file: Admin.jsx ~ line 11 ~ Axios.get ~ response",
+  //       response
+  //     );
 
-      setProductsList(response.data);
-    });
-  }, []);
+  //     setProductsList(response.data);
+  //   });
+  // }, []);
   return (
     <>
       <Navbar />
-
+      <CarList />
       {/* {productsList.map((val, key) => {
         return (
           <div key={key}>
@@ -31,7 +31,7 @@ function Admin() {
         );
       })} */}
 
-      <div>
+      {/* <div>
         <div>
           <h1>Invetory List</h1>
           <table>
@@ -62,7 +62,7 @@ function Admin() {
             ))}
           </table>
         </div>
-      </div>
+      </div> */}
       <Footer />
     </>
   );

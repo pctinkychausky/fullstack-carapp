@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function ProfileElement() {
   const { user } = useAuth0();
+
   return (
     <Container className="mb-5">
       <Row className="align-items-center profile-header mb-5 text-center text-md-left">

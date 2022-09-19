@@ -69,7 +69,7 @@ function Narbar() {
                   sx={{ flexGrow: 0, fontWeight: 500 }}
                 >
                   Rental.com
-                </Typography>{" "}
+                </Typography>
               </NavLink>
 
               <Typography

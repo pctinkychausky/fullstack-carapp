@@ -15,7 +15,7 @@ console.log(`MONGODB_URI ${MONGODB_URI}`);
 (async () => {
   try {
     const conn = await mongoose.connect(MONGODB_URI);
-    // console.log("🚀 ~ file: index.js ~ line 21 ~ conn", conn);
+    console.log(`DB Connected to ${MONGODB_URI}`);
     mongoose.connection.on("error", (err) => {
       console.log(err);
     });
