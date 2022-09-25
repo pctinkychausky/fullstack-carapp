@@ -6,7 +6,7 @@ dotenv.config({ path: findConfig(".env") });
 // const logger = require("./logger");
 
 // TODO! change localDBName name to match your local db!!
-const localDBName = "car-rental";
+const localDBName = "carhire";
 const { MONGODB_URI = `mongodb://localhost:27017/${localDBName}` } =
   process.env;
 

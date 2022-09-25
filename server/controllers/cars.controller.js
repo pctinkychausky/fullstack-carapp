@@ -21,10 +21,10 @@ export function getCars(req, res) {
   Car.find({}).exec((err, cars) => {
     if (err) return res.status(500).send(err);
     res.status(200).json(cars);
-    console.log(
-      "🚀 ~ file: cars.controller.js ~ line 24 ~ Car.find ~ cars",
-      cars
-    );
+    // console.log(
+    //   "🚀 ~ file: cars.controller.js ~ line 24 ~ Car.find ~ cars",
+    //   cars
+    // );
   });
 
   //   let query = {};

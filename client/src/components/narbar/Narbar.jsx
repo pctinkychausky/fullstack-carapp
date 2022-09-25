@@ -14,7 +14,7 @@ import "./navbar.css";
 import { NavLink } from "react-router-dom";
 import LoginButton from "../loginButton/LoginButton";
 import LogoutButton from "../logoutButton/LogoutButton";
-import LogBar from "../../components/logBar/LogBar";
+import LoginIcon from "../loginIcon/LoginIcon";
 
 function Narbar() {
   const theme = createTheme({
@@ -87,7 +87,7 @@ function Narbar() {
                   £ GBP
                 </Button>
                 <span>
-                  <LogBar />
+                  <LoginIcon />
                   {/* <LoginButton />
                   <LogoutButton /> */}
                 </span>

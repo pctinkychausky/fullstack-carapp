@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./LogBar.css";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./LoginIcon.css";
 
 import {
   Collapse,
@@ -67,7 +67,8 @@ const NavBar = () => {
                 className="dropdown-profile"
                 activeClassName="router-link-exact-active"
               >
-                <FontAwesomeIcon icon="user" className="mr-3" /> Profile
+                Profile
+                {/* <FontAwesomeIcon icon="user" className="mr-3" /> Profile */}
               </DropdownItem>
               <DropdownItem
                 tag={RouterNavLink}
@@ -75,17 +76,18 @@ const NavBar = () => {
                 className="dropdown-profile"
                 activeClassName="router-link-exact-active"
               >
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                   icon="fa-solid fa-money-check-dollar-pen"
                   className="mr-3"
-                />
+                /> */}
                 Admin
               </DropdownItem>
               <DropdownItem
                 id="qsLogoutBtn"
                 onClick={() => logoutWithRedirect()}
               >
-                <FontAwesomeIcon icon="power-off" className="mr-3" /> Log out
+                Log out
+                {/* <FontAwesomeIcon icon="power-off" className="mr-3" /> Log out */}
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
@@ -123,7 +125,7 @@ const NavBar = () => {
             </span>
           </NavItem>
           <NavItem>
-            <FontAwesomeIcon icon="user" className="mr-3" />
+            {/* <FontAwesomeIcon icon="user" className="mr-3" /> */}
             <RouterNavLink
               to="/profile"
               activeClassName="router-link-exact-active"
@@ -132,7 +134,7 @@ const NavBar = () => {
             </RouterNavLink>
           </NavItem>
           <NavItem>
-            <FontAwesomeIcon icon="power-off" className="mr-3" />
+            {/* <FontAwesomeIcon icon="power-off" className="mr-3" /> */}
             <RouterNavLink
               to="#"
               id="qsLogoutBtn"

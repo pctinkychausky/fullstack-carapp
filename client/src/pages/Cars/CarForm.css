@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 400px;
+}
+
+.card-container {
+  margin-top: 20px;
+}
+
+.imageUpload {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.MuiCardContent-root.createMode #filled-image-input {
+}
+
+.MuiCardContent-root.editMode #filled-image-input {
+  display: none;
+}

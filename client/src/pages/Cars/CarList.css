@@ -1,0 +1,19 @@
+.product-container {
+  display: flex;
+  flex-direction: column;
+  background: rgb(235, 224, 224);
+  border-radius: 4px;
+  margin: 20px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.product-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-container {
+  display: flex;
+}

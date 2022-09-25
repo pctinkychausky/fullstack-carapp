@@ -21,7 +21,18 @@ export const CarsProvider = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
   // const [search, setSearch] = useState("");
-  // const { addToast } = useToasts();
+  // const { addToast } = useToasts();  const [Make, setMake] = useState(cars.Make);
+  const [Make, setMake] = useState("");
+  const [Model, setModel] = useState("");
+  const [FullName, setFullName] = useState("");
+  const [City, setCity] = useState("");
+  const [Year, setYear] = useState("");
+  const [ImageUrl, setImageUrl] = useState("");
+  const [Gearbox, setGearbox] = useState("");
+  const [Seats, setSeats] = useState("");
+  const [Doors, setDoors] = useState("");
+  const [Price, setPrice] = useState("");
+  const [formMode, setFormMode] = useState("createMode");
 
   const CARS_ENDPOINT = `http://localhost:6001/api/v1/cars/`;
 
@@ -81,9 +92,38 @@ export const CarsProvider = (props) => {
     [cars]
   );
 
+  const EditHandler = useCallback(async (id) => {
+    const index = cars.findIndex((car) => car._id === id);
+    console.log(index);
+    console.log("edit", id);
+    if (index === -1) throw new Error(`Car with index ${id} not found`);
+    // Get actual car
+    const oldCar = cars[index];
+    console.log(
+      "🚀 ~ file: cars.context.jsx ~ line 101 ~ editHandler ~ oldCar",
+      oldCar
+    );
+
+    try {
+      setFormMode("editMode");
+      setMake(oldCar.Make);
+      setModel(oldCar.Model);
+      setFullName(oldCar.FullName);
+      setCity(oldCar.City);
+      setYear(oldCar.Year);
+      setImageUrl(oldCar.ImageUrl);
+      setGearbox(oldCar.Gearbox);
+      setSeats(oldCar.Seats);
+      setDoors(oldCar.Doors);
+      setPrice(oldCar.Price);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
   const updateCar = useCallback(
     async (id, formData) => {
-      console.log("updating", id, formData);
+      // console.log("updating", id, formData);
       let updatedCar = null;
       // Get index
       const index = cars.findIndex((car) => car._id === id);
@@ -143,6 +183,7 @@ export const CarsProvider = (props) => {
 
   const deleteCar = useCallback(
     async (id) => {
+      console.log("🚀 ~ file: cars.context.jsx ~ line 155 ~ id", id);
       let deletedCar = null;
       try {
         const response = await fetch(`${CARS_ENDPOINT}${id}`, {
@@ -152,6 +193,7 @@ export const CarsProvider = (props) => {
             // 'Content-Type': 'application/x-www-form-urlencoded',
           },
         });
+
         if (response.status !== 204) {
           throw response;
         }
@@ -176,6 +218,16 @@ export const CarsProvider = (props) => {
   return (
     <CarsContext.Provider
       value={{
+        Make,
+        Model,
+        FullName,
+        City,
+        Year,
+        ImageUrl,
+        Gearbox,
+        Seats,
+        Doors,
+        Price,
         cars,
         loading,
         error,
@@ -183,6 +235,7 @@ export const CarsProvider = (props) => {
         addCar,
         updateCar,
         deleteCar,
+        EditHandler,
       }}
     >
       {props.children}

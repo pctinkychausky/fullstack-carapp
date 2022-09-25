@@ -2,10 +2,19 @@ import React, { useContext, useEffect } from "react";
 import { CarsContext } from "../../contexts/cars.context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import "./CarList.css";
 
 function CarList() {
-  const { cars, loading, error, fetchCars, addCar, updateCar, deleteCar } =
-    useContext(CarsContext);
+  const {
+    cars,
+    loading,
+    error,
+    fetchCars,
+    addCar,
+    updateCar,
+    deleteCar,
+    EditHandler,
+  } = useContext(CarsContext);
 
   useEffect(() => {
     fetchCars();
@@ -20,29 +29,35 @@ function CarList() {
       )}
 
       <div>
-        <h1>Invetory List</h1>
         <table>
-          <tbody>
-            <tr>
-              <th>Image</th>
-              <th>Id</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Action</th>
-            </tr>
-          </tbody>
           {cars.map((product) => (
-            <tbody key={product._id}>
-              <tr>
+            <tbody key={product._id} className="product-container">
+              <tr className="product-details">
                 <td>
-                  <img src={product.avatar_url} objectFit="cover" alt="" />
+                  <img src={product.ImageUrl} objectFit="cover" alt="" />
                 </td>
-                <td>{product._id.slice(0, 20)}...</td>
-                <td>{product.name}</td>
-                <td>${product.bhp[0]}</td>
+                <td>{product._id.slice(0, 20)}</td>
+                <td>{product.Make}</td>
+                <td>{product.Model}</td>
+                <td>{product.City}</td>
+                <td>{product.Year}</td>
+                <td>${product.Price}/day</td>
                 <td>
-                  <button>Edit</button>
-                  <button onClick={deleteCar}>Delete</button>
+                  <button
+                    // onClick={() => {
+                    //   updateCar(product._id);
+                    // }}
+                    onClick={() => EditHandler(product._id)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => {
+                      deleteCar(product._id);
+                    }}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>
