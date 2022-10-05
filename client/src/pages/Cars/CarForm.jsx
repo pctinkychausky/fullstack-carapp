@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -10,68 +10,85 @@ import "./CarForm.css";
 
 function CarForm({ initialValues }) {
   const {
-    Make,
-    Model,
-    FullName,
-    City,
-    Year,
-    ImageUrl,
-    Gearbox,
-    Seats,
-    Doors,
-    Price,
-    cars,
-    loading,
-    error,
-    fetchCars,
     addCar,
     updateCar,
-    deleteCar,
     // formMode,
     // setFormMode,
   } = useContext(CarsContext);
-
-  const [state, setState] = useState("");
 
   let { id } = useParams();
   const [populated, setPopulated] = useState(false);
   const [image, setImage] = useState("");
 
+  const defaultValues = {
+    Make: "",
+    Model: "",
+    FullName: "",
+    // ImageUrl: "",
+    City: "",
+    Year: "",
+    Gearbox: "",
+    Seats: "",
+    Doors: "",
+    Price: "",
+  };
+
+  const {
+    // errors,
+    reset,
+    formState,
+    register,
+    handleSubmit,
+    control,
+    errors,
+  } = useForm({
+    mode: "onChange",
+    reValidateMode: "onChange",
+    defaultValues,
+  });
+
+  const { isDirty, isValid } = formState;
+
   const fileSelectedHandler = (e) => {
     setImage(e.target.files[0]);
   };
 
-  const {
-    setValue,
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
-
   if (initialValues && !populated) {
-    reset(initialValues);
+    reset({
+      ...initialValues,
+    });
     setPopulated(true);
   }
 
-  const onSubmit = (formValues) => {
-    if (!populated) {
-      //   const updates = {};
-      //   for (const key in initialValues) {
-      //     if (initialValues.hasOwnProperty(key)) {
-      //       if (initialValues[key] !== formValues[key] && key[0] !== "_") {
-      //         updates[key] = formValues[key];
-      //       }
-      //     }
-      //   }
-      updateCar(id, formValues);
-      console.log("updates", formValues);
+  const onSubmit = async (formValues) => {
+    if (populated) {
+      const updates = {};
+      for (const key in initialValues) {
+        console.log(
+          "🚀 ~ file: ProductForm.jsx ~ line 88 ~ onSubmit ~ initialValues",
+          initialValues
+        );
+        if (initialValues.hasOwnProperty(key)) {
+          if (initialValues[key] !== formValues[key] && key[0] !== "_") {
+            console.log(
+              "🚀 ~ file: ProductForm.jsx ~ line 94 ~ onSubmit ~ initialValues[key]",
+              initialValues[key]
+            );
+            updates[key] = formValues[key];
+            console.log(
+              "🚀 ~ file: ProductForm.jsx ~ line 99 ~ onSubmit ~ updates[key]",
+              updates[key]
+            );
+          }
+        }
+      }
+
+      updateCar(id, updates);
     } else {
       addCar(formValues);
     }
+    reset(defaultValues);
   };
-
-  console.log(errors);
 
   return (
     <Card
@@ -80,108 +97,98 @@ function CarForm({ initialValues }) {
     >
       <CardContent>
         <div>
-          <h3 className="form-title">Add Car</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="form">
             <TextField
               required
-              id="filled-password-input"
+              id="Make"
               label="Make"
               variant="filled"
               type="text"
               placeholder="Make"
-              value={Make}
               {...register("Make", { required: true, maxLength: 80 })}
             />
             <TextField
               required
-              id="filled-password-input"
+              id="filled-Model-input"
               label="Model"
               variant="filled"
               type="text"
-              value={Model}
               placeholder="Model"
               {...register("Model", { required: true, maxLength: 100 })}
             />
             <TextField
               required
-              id="filled-password-input"
+              id="filled-FullName-input"
               label="FullName"
               variant="filled"
               type="text"
-              value={FullName}
               placeholder="FullName"
               {...register("FullName", {})}
             />
             <TextField
-              className=""
+              className="filled-image-input"
               required
               id="filled-image-input"
-              //   label="ImageUrl"
+              label="image"
               variant="filled"
               // type="url"
               type="file"
               // value={ImageUrl}
-              placeholder={image}
+
               onChange={fileSelectedHandler}
               {...register("image", {})}
             />
             <TextField
               required
-              id="filled-password-input"
+              id="filled-City-input"
               label="City"
               variant="filled"
               type="text"
-              value={City}
               placeholder="City"
               {...register("City", {})}
             />
             <TextField
               required
-              id="filled-password-input"
+              id="filled-Year-input"
               label="Year"
               variant="filled"
               type="number"
-              value={Year}
               placeholder="Year"
               {...register("Year", { required: true, maxLength: 4 })}
             />
             <TextField
               required
-              id="filled-password-input"
+              id="filled-Gearbox-input"
               label="Gearbox"
               variant="filled"
               type="text"
-              value={Gearbox}
               placeholder="Gearbox"
               {...register("Gearbox", {})}
             />
             <TextField
               required
-              id="filled-password-input"
+              id="filled-Seats-input"
               label="Seats"
               variant="filled"
               type="number"
-              value={Seats}
               placeholder="Seats"
               {...register("Seats", { required: true, max: 7, min: 1 })}
             />
             <TextField
               required
-              id="filled-password-input"
+              id="filled-Doors-input"
               label="Doors"
               variant="filled"
               type="number"
-              value={Doors}
               placeholder="Doors"
               {...register("Doors", { required: true, max: 5, min: 2 })}
             />
             <TextField
               required
-              id="filled-password-input"
+              id="filled-Price-input"
               label="Price"
               variant="filled"
               type="number"
-              value={Price}
               placeholder="Price"
               {...register("Price", { required: true, max: 999, min: 1 })}
             />
@@ -189,25 +196,17 @@ function CarForm({ initialValues }) {
               <Button
                 variant="outlined"
                 type="submit"
-                onClick={() =>
-                  reset({
-                    Make: "",
-                    Model: "",
-                    FullName: "",
-                    ImageUrl: "",
-                    City: "",
-                    Year: "",
-                    Gearbox: "",
-                    Seats: "",
-                    Doors: "",
-                    Price: "",
-                  })
-                }
+                onClick={() => reset(defaultValues)}
               >
                 Reset
               </Button>
-              <Button variant="contained" type="submit">
-                {populated ? "Update" : "Submit"}
+              <Button
+                variant="contained"
+                type="submit"
+                color="primary"
+                disabled={!isValid || !isDirty}
+              >
+                {populated ? "Update" : "Add"}Product
               </Button>
             </div>
           </form>

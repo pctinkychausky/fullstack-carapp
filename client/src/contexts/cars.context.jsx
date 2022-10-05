@@ -22,16 +22,7 @@ export const CarsProvider = (props) => {
   const [error, setError] = useState(null);
   // const [search, setSearch] = useState("");
   // const { addToast } = useToasts();  const [Make, setMake] = useState(cars.Make);
-  const [Make, setMake] = useState("");
-  const [Model, setModel] = useState("");
-  const [FullName, setFullName] = useState("");
-  const [City, setCity] = useState("");
-  const [Year, setYear] = useState("");
-  const [ImageUrl, setImageUrl] = useState("");
-  const [Gearbox, setGearbox] = useState("");
-  const [Seats, setSeats] = useState("");
-  const [Doors, setDoors] = useState("");
-  const [Price, setPrice] = useState("");
+
   const [formMode, setFormMode] = useState("createMode");
 
   const CARS_ENDPOINT = `http://localhost:6001/api/v1/cars/`;
@@ -92,56 +83,9 @@ export const CarsProvider = (props) => {
     [cars]
   );
 
-  const EditHandler = useCallback(async (id) => {
-    const index = cars.findIndex((car) => car._id === id);
-    console.log(index);
-    console.log("edit", id);
-    if (index === -1) throw new Error(`Car with index ${id} not found`);
-    // Get actual car
-    const oldCar = cars[index];
-    console.log(
-      "🚀 ~ file: cars.context.jsx ~ line 101 ~ editHandler ~ oldCar",
-      oldCar
-    );
-
-    try {
-      setFormMode("editMode");
-      setMake(oldCar.Make);
-      setModel(oldCar.Model);
-      setFullName(oldCar.FullName);
-      setCity(oldCar.City);
-      setYear(oldCar.Year);
-      setImageUrl(oldCar.ImageUrl);
-      setGearbox(oldCar.Gearbox);
-      setSeats(oldCar.Seats);
-      setDoors(oldCar.Doors);
-      setPrice(oldCar.Price);
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
-
   const updateCar = useCallback(
-    async (id, formData) => {
-      // console.log("updating", id, formData);
-      let updatedCar = null;
-      // Get index
-      const index = cars.findIndex((car) => car._id === id);
-      console.log(index);
-      if (index === -1) throw new Error(`Car with index ${id} not found`);
-      // Get actual car
-      const oldCar = cars[index];
-      console.log("oldCar", oldCar);
-
-      // Send the differences, not the whole update
-      const updates = {};
-
-      for (const key of Object.keys(oldCar)) {
-        if (key === "_id") continue;
-        if (oldCar[key] !== formData[key]) {
-          updates[key] = formData[key];
-        }
-      }
+    async (id, updates) => {
+      let newCar = null;
 
       try {
         const response = await fetch(`${CARS_ENDPOINT}${id}`, {
@@ -152,34 +96,107 @@ export const CarsProvider = (props) => {
           },
           body: JSON.stringify(updates),
         });
-
-        if (response.status !== 200) {
+        if (!response.ok) {
           throw response;
         }
+        // Get index
+        const index = cars.findIndex((product) => product._id === id);
 
-        // Merge with formData
-        updatedCar = {
+        // Get actual product
+        const oldCar = cars[index];
+        console.log(
+          "🚀 ~ file: products.context.js ~ line 95 ~ updateCar ~ oldCar",
+          oldCar
+        );
+
+        // Merge with updates
+        newCar = {
+          // legit use of 'var', so can be seen in catch block
           ...oldCar,
-          ...formData, // order here is important for the override!!
+          ...updates, // order here is important for the override!!
         };
-        console.log("updatedCar", updatedCar);
-        // recreate the cars array
+        console.log(
+          "🚀 ~ file: products.context.js ~ line 99 ~ updateCar ~ newCar",
+          newCar
+        );
+        // recreate the products array
         const updatedCars = [
           ...cars.slice(0, index),
-          updatedCar,
+          newCar,
           ...cars.slice(index + 1),
         ];
-        localStorage.setItem("cars", JSON.stringify(updatedCars));
-        // addToast(`Updated ${updatedCar.name}`, {
-        //   appearance: "success",
-        // });
+        console.log(
+          "🚀 ~ file: products.context.js ~ line 120 ~ updatedCars",
+          updatedCars
+        );
         setCars(updatedCars);
       } catch (err) {
         console.log(err);
+        setError(err);
       }
     },
     [cars]
   );
+
+  // const updateCar = useCallback(
+  //   async (id, formData) => {
+  //     // console.log("updating", id, formData);
+  //     let updatedCar = null;
+  //     // Get index
+  //     const index = cars.findIndex((car) => car._id === id);
+  //     console.log(index);
+  //     if (index === -1) throw new Error(`Car with index ${id} not found`);
+  //     // Get actual car
+  //     const oldCar = cars[index];
+  //     console.log("oldCar", oldCar);
+
+  //     // Send the differences, not the whole update
+  //     const updates = {};
+
+  //     for (const key of Object.keys(oldCar)) {
+  //       if (key === "_id") continue;
+  //       if (oldCar[key] !== formData[key]) {
+  //         updates[key] = formData[key];
+  //       }
+  //     }
+
+  //     try {
+  //       const response = await fetch(`${CARS_ENDPOINT}${id}`, {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           // 'Content-Type': 'application/x-www-form-urlencoded',
+  //         },
+  //         body: JSON.stringify(updates),
+  //       });
+
+  //       if (response.status !== 200) {
+  //         throw response;
+  //       }
+
+  //       // Merge with formData
+  //       updatedCar = {
+  //         ...oldCar,
+  //         ...formData, // order here is important for the override!!
+  //       };
+  //       console.log("updatedCar", updatedCar);
+  //       // recreate the cars array
+  //       const updatedCars = [
+  //         ...cars.slice(0, index),
+  //         updatedCar,
+  //         ...cars.slice(index + 1),
+  //       ];
+  //       localStorage.setItem("cars", JSON.stringify(updatedCars));
+  //       // addToast(`Updated ${updatedCar.name}`, {
+  //       //   appearance: "success",
+  //       // });
+  //       setCars(updatedCars);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   },
+  //   [cars]
+  // );
 
   const deleteCar = useCallback(
     async (id) => {
@@ -218,24 +235,14 @@ export const CarsProvider = (props) => {
   return (
     <CarsContext.Provider
       value={{
-        Make,
-        Model,
-        FullName,
-        City,
-        Year,
-        ImageUrl,
-        Gearbox,
-        Seats,
-        Doors,
-        Price,
         cars,
         loading,
         error,
+        loaded,
         fetchCars,
         addCar,
         updateCar,
         deleteCar,
-        EditHandler,
       }}
     >
       {props.children}

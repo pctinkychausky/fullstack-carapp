@@ -13,9 +13,8 @@ import { CarsProvider } from "./contexts/cars.context";
 // Cars
 import CarList from "./pages/Cars/CarList";
 import AddCar from "./pages/Cars/AddCar";
-import UpdateCar from "./pages/Cars/UpdateCar";
+import UpdateCar from "./pages/UpdateCar";
 import DeleteCar from "./pages/Cars/DeleteCar";
-
 import NotFound from "./pages/NotFound";
 
 function App() {

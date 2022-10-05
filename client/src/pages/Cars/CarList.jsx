@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { CarsContext } from "../../contexts/cars.context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import "./CarList.css";
 
 function CarList() {
+  const navigate = useNavigate();
   const {
     cars,
     loading,
@@ -36,7 +38,7 @@ function CarList() {
                 <td>
                   <img src={product.ImageUrl} objectFit="cover" alt="" />
                 </td>
-                <td>{product._id.slice(0, 20)}</td>
+                <td>{product._id}</td>
                 <td>{product.Make}</td>
                 <td>{product.Model}</td>
                 <td>{product.City}</td>
@@ -44,10 +46,11 @@ function CarList() {
                 <td>${product.Price}/day</td>
                 <td>
                   <button
-                    // onClick={() => {
-                    //   updateCar(product._id);
-                    // }}
-                    onClick={() => EditHandler(product._id)}
+                    onClick={() => {
+                      navigate(`/admin/update/${product._id}`);
+                    }}
+
+                    // onClick={() => EditHandler(product._id)}
                   >
                     Edit
                   </button>

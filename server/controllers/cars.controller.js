@@ -60,7 +60,7 @@ export function getCars(req, res) {
 // }
 
 export function addCar(req, res) {
-  console.log(req.body);
+  console.log("req.body", req.body);
   const newCar = new Car(req.body);
 
   newCar.save((err, car) => {
