@@ -17,10 +17,6 @@ export const CarsProvider = (props) => {
   const [cars, setCars] = useState(() => {
     return JSON.parse(localStorage.getItem("cars")) || [];
   });
-  console.log(
-    "🚀 ~ file: cars.context.jsx ~ line 20 ~ const[cars,setCars]=useState ~ cars",
-    cars
-  );
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
@@ -34,29 +30,53 @@ export const CarsProvider = (props) => {
   const fetchCars = useCallback(async () => {
     // console.log('loading', loading);
     // console.log('error', error);
+
     if (loading || loaded || error) {
       return;
     }
-    setLoading(true);
+
+    setLoading();
+
     try {
       const response = await fetch(CARS_ENDPOINT);
-      if (response.status !== 200) {
+      if (!response.ok) {
         throw response;
       }
       const data = await response.json();
-      console.log(
-        "🚀 ~ file: cars.context.jsx ~ line 43 ~ fetchCars ~ data",
-        data
-      );
-      localStorage.setItem("cars", JSON.stringify(data));
       setCars(data);
+      console.log("products from context", cars);
     } catch (err) {
-      setError(err.message || err.statusText);
-    } finally {
-      setLoaded(true);
-      setLoading(false);
+      console.log("err", err);
+      setError(err);
     }
-  }, [error, loaded, loading]);
+  }, [setError, setLoading, setCars, error, loaded, loading]);
+
+  // const fetchCars = useCallback(async () => {
+  //   // console.log('loading', loading);
+  //   // console.log('error', error);
+  //   if (loading || loaded || error) {
+  //     return;
+  //   }
+  //   setLoading(true);
+  //   try {
+  //     const response = await fetch(CARS_ENDPOINT);
+  //     if (response.status !== 200) {
+  //       throw response;
+  //     }
+  //     const data = await response.json();
+  //     console.log(
+  //       "🚀 ~ file: cars.context.jsx ~ line 43 ~ fetchCars ~ data",
+  //       data
+  //     );
+  //     localStorage.setItem("cars", JSON.stringify(data));
+  //     setCars(data);
+  //   } catch (err) {
+  //     setError(err.message || err.statusText);
+  //   } finally {
+  //     setLoaded(true);
+  //     setLoading(false);
+  //   }
+  // }, [error, loaded, loading]);
 
   const addCar = useCallback(
     async (formData) => {
@@ -239,6 +259,7 @@ export const CarsProvider = (props) => {
     },
     [cars]
   );
+  console.log("🚀 cars11111111111111", cars);
 
   return (
     <CarsContext.Provider

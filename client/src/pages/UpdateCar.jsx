@@ -7,22 +7,18 @@ import CarForm from "./Cars/CarForm";
 
 function UpdateProducts() {
   let { id } = useParams();
-  console.log("🚀 ~ file: UpdateCar.jsx ~ line 10 ~ UpdateProducts ~ id", id);
 
   const { cars, loaded, fetchCars } = useContext(CarsContext);
-  console.log("cars", cars);
-  console.log("carsid", cars._id);
-  console.log("carsid", cars[0]);
-  // useEffect(() => {
-  //   console.log("in useEffect", cars, loaded);
-  //   if (!loaded) {
-  //     fetchCars();
-  //   }
-  // }, [loaded, fetchCars, cars]);
 
-  console.log("cars", cars);
+  useEffect(() => {
+    console.log("in useEffect", cars, loaded);
+    if (!loaded) {
+      fetchCars();
+    }
+  }, [loaded, fetchCars, cars]);
+
   const productToBeUpdated = cars.find((product) => product._id === id);
-  console.log("productToBeUpdated", productToBeUpdated);
+  console.log("productToBeUpdated1", productToBeUpdated);
   return (
     <div className="App">
       <Navbar />
