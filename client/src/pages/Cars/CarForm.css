@@ -21,3 +21,14 @@
 .MuiCardContent-root.editMode #filled-image-input {
   display: none;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 400px;
+}
+
+.textfield {
+  margin-bottom: 20px;
+}

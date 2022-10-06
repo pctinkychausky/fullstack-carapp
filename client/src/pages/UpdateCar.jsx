@@ -8,9 +8,11 @@ import CarForm from "./Cars/CarForm";
 function UpdateProducts() {
   let { id } = useParams();
   console.log("🚀 ~ file: UpdateCar.jsx ~ line 10 ~ UpdateProducts ~ id", id);
+
   const { cars, loaded, fetchCars } = useContext(CarsContext);
   console.log("cars", cars);
-
+  console.log("carsid", cars._id);
+  console.log("carsid", cars[0]);
   // useEffect(() => {
   //   console.log("in useEffect", cars, loaded);
   //   if (!loaded) {

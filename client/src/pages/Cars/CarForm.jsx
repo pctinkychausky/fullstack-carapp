@@ -1,5 +1,11 @@
 import React, { useContext, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import {
+  useForm,
+  Controller,
+  FormProvider,
+  useFormContext,
+  useFormState,
+} from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -9,12 +15,7 @@ import { useParams } from "react-router-dom";
 import "./CarForm.css";
 
 function CarForm({ initialValues }) {
-  const {
-    addCar,
-    updateCar,
-    // formMode,
-    // setFormMode,
-  } = useContext(CarsContext);
+  const { addCar, updateCar } = useContext(CarsContext);
 
   let { id } = useParams();
   const [populated, setPopulated] = useState(false);
@@ -24,7 +25,7 @@ function CarForm({ initialValues }) {
     Make: "",
     Model: "",
     FullName: "",
-    // ImageUrl: "",
+    ImageUrl: "",
     City: "",
     Year: "",
     Gearbox: "",
@@ -33,21 +34,26 @@ function CarForm({ initialValues }) {
     Price: "",
   };
 
-  const {
-    // errors,
-    reset,
-    formState,
-    register,
-    handleSubmit,
-    control,
-    errors,
-  } = useForm({
+  const methods = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues,
   });
 
-  const { isDirty, isValid } = formState;
+  const { handleSubmit, formState, reset } = methods;
+  const { errors, isValid, isDirty } = formState;
+
+  // React.useEffect(() => {
+  //   console.log("err2", formState.errors);
+  // }, [formState]);
+
+  // const onSubmit = (data) => {
+  //   console.log("data", data);
+  // };
+
+  const onError = (err) => {
+    console.log("err", err);
+  };
 
   const fileSelectedHandler = (e) => {
     setImage(e.target.files[0]);
@@ -97,119 +103,170 @@ function CarForm({ initialValues }) {
     >
       <CardContent>
         <div>
-          <form onSubmit={handleSubmit(onSubmit)} className="form">
-            <TextField
-              required
-              id="Make"
-              label="Make"
-              variant="filled"
-              type="text"
-              placeholder="Make"
-              {...register("Make", { required: true, maxLength: 80 })}
-            />
-            <TextField
-              required
-              id="filled-Model-input"
-              label="Model"
-              variant="filled"
-              type="text"
-              placeholder="Model"
-              {...register("Model", { required: true, maxLength: 100 })}
-            />
-            <TextField
-              required
-              id="filled-FullName-input"
-              label="FullName"
-              variant="filled"
-              type="text"
-              placeholder="FullName"
-              {...register("FullName", {})}
-            />
-            <TextField
-              className="filled-image-input"
-              required
-              id="filled-image-input"
-              label="image"
-              variant="filled"
-              // type="url"
-              type="file"
-              // value={ImageUrl}
-
-              onChange={fileSelectedHandler}
-              {...register("image", {})}
-            />
-            <TextField
-              required
-              id="filled-City-input"
-              label="City"
-              variant="filled"
-              type="text"
-              placeholder="City"
-              {...register("City", {})}
-            />
-            <TextField
-              required
-              id="filled-Year-input"
-              label="Year"
-              variant="filled"
-              type="number"
-              placeholder="Year"
-              {...register("Year", { required: true, maxLength: 4 })}
-            />
-            <TextField
-              required
-              id="filled-Gearbox-input"
-              label="Gearbox"
-              variant="filled"
-              type="text"
-              placeholder="Gearbox"
-              {...register("Gearbox", {})}
-            />
-            <TextField
-              required
-              id="filled-Seats-input"
-              label="Seats"
-              variant="filled"
-              type="number"
-              placeholder="Seats"
-              {...register("Seats", { required: true, max: 7, min: 1 })}
-            />
-            <TextField
-              required
-              id="filled-Doors-input"
-              label="Doors"
-              variant="filled"
-              type="number"
-              placeholder="Doors"
-              {...register("Doors", { required: true, max: 5, min: 2 })}
-            />
-            <TextField
-              required
-              id="filled-Price-input"
-              label="Price"
-              variant="filled"
-              type="number"
-              placeholder="Price"
-              {...register("Price", { required: true, max: 999, min: 1 })}
-            />
-            <div>
-              <Button
-                variant="outlined"
-                type="submit"
-                onClick={() => reset(defaultValues)}
-              >
-                Reset
-              </Button>
-              <Button
-                variant="contained"
-                type="submit"
-                color="primary"
-                disabled={!isValid || !isDirty}
-              >
-                {populated ? "Update" : "Add"}Product
-              </Button>
-            </div>
-          </form>
+          <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit, onError)}>
+              <Controller
+                className="controller"
+                name="Make"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <TextField
+                    className="textfield"
+                    label="Make"
+                    variant="filled"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    ref={ref}
+                    error={!!errors.Make}
+                    helperText={errors.Make?.message}
+                  />
+                )}
+                rules={{ required: "information required!" }}
+              />
+              <Controller
+                className="controller"
+                name="Model"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <TextField
+                    className="textfield"
+                    label="Model"
+                    variant="filled"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    ref={ref}
+                  />
+                )}
+              />
+              <Controller
+                className="controller"
+                name="FullName"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <TextField
+                    className="textfield"
+                    label="FullName"
+                    variant="filled"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    ref={ref}
+                  />
+                )}
+              />
+              <Controller
+                className="controller"
+                name="City"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <TextField
+                    className="textfield"
+                    label="City"
+                    variant="filled"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    ref={ref}
+                  />
+                )}
+              />{" "}
+              <Controller
+                className="controller"
+                name="Year"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <TextField
+                    className="textfield"
+                    label="Year"
+                    variant="filled"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    ref={ref}
+                  />
+                )}
+              />{" "}
+              <Controller
+                className="controller"
+                name="Gearbox"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <TextField
+                    className="textfield"
+                    label="Gearbox"
+                    variant="filled"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    ref={ref}
+                  />
+                )}
+              />{" "}
+              <Controller
+                className="controller"
+                name="Seats"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <TextField
+                    className="textfield"
+                    label="Seats"
+                    variant="filled"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    ref={ref}
+                  />
+                )}
+              />{" "}
+              <Controller
+                className="controller"
+                name="Doors"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <TextField
+                    className="textfield"
+                    label="Doors"
+                    variant="filled"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    ref={ref}
+                  />
+                )}
+              />{" "}
+              <Controller
+                className="controller"
+                name="Price"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <TextField
+                    className="textfield"
+                    label="Price"
+                    variant="filled"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    ref={ref}
+                  />
+                )}
+              />
+              <div>
+                <Button
+                  variant="outlined"
+                  type="submit"
+                  onClick={() => {
+                    reset((defaultValues) => ({
+                      ...defaultValues,
+                    }));
+                  }}
+                >
+                  Reset
+                </Button>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  disabled={!isValid || !isDirty}
+                >
+                  {populated ? "Update" : "Add"}
+                  Product
+                </Button>
+              </div>
+            </form>
+          </FormProvider>
         </div>
       </CardContent>
     </Card>

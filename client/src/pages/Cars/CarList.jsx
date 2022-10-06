@@ -7,16 +7,8 @@ import "./CarList.css";
 
 function CarList() {
   const navigate = useNavigate();
-  const {
-    cars,
-    loading,
-    error,
-    fetchCars,
-    addCar,
-    updateCar,
-    deleteCar,
-    EditHandler,
-  } = useContext(CarsContext);
+  const { cars, loading, error, fetchCars, deleteCar, EditHandler } =
+    useContext(CarsContext);
 
   useEffect(() => {
     fetchCars();

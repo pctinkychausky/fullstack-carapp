@@ -17,6 +17,10 @@ export const CarsProvider = (props) => {
   const [cars, setCars] = useState(() => {
     return JSON.parse(localStorage.getItem("cars")) || [];
   });
+  console.log(
+    "🚀 ~ file: cars.context.jsx ~ line 20 ~ const[cars,setCars]=useState ~ cars",
+    cars
+  );
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
@@ -40,6 +44,10 @@ export const CarsProvider = (props) => {
         throw response;
       }
       const data = await response.json();
+      console.log(
+        "🚀 ~ file: cars.context.jsx ~ line 43 ~ fetchCars ~ data",
+        data
+      );
       localStorage.setItem("cars", JSON.stringify(data));
       setCars(data);
     } catch (err) {
