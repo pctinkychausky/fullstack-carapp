@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import StarIcon from "@mui/icons-material/Star";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useContext } from "react";
-import { CarsContext } from "../context/cars.Context";
+import { CarsContext } from "../../contexts/cars.context";
 
 function CarList() {
   const { filteredCars } = useContext(CarsContext);

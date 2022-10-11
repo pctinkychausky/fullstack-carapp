@@ -5,7 +5,6 @@ import Carhire from "./pages/Carhire";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
-import { CarsContextProviderWrapper } from "./components/context/cars.Context";
 
 // Contexts
 import { CarsProvider } from "./contexts/cars.context";
@@ -22,22 +21,20 @@ function App() {
     <div className="App">
       <Router>
         <CarsProvider>
-          <CarsContextProviderWrapper>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/carhire" element={<Carhire />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/admin">
-                <Route index element={<Admin />} />
-                <Route path="add" element={<AddCar />} />
-                <Route path="update/:id" element={<UpdateCar />} />
-                <Route path="delete/:id" element={<DeleteCar />} />
-                <Route path="*" element={<NotFound />} />
-              </Route>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/carhire" element={<Carhire />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/admin">
+              <Route index element={<Admin />} />
+              <Route path="add" element={<AddCar />} />
+              <Route path="update/:id" element={<UpdateCar />} />
+              <Route path="delete/:id" element={<DeleteCar />} />
               <Route path="*" element={<NotFound />} />
-            </Routes>
-          </CarsContextProviderWrapper>
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </CarsProvider>
       </Router>
     </div>

@@ -11,6 +11,10 @@ export const CarsContext = createContext({
   loading: false,
   error: null,
   cars: [],
+  filterCity: "",
+  setFilterCity: () => {},
+  filteredCars: [],
+  availableCities: [],
 });
 
 export const CarsProvider = (props) => {
@@ -20,12 +24,23 @@ export const CarsProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const [filterCity, setFilterCity] = useState("");
   // const [search, setSearch] = useState("");
   // const { addToast } = useToasts();  const [Make, setMake] = useState(cars.Make);
 
   const [formMode, setFormMode] = useState("createMode");
 
   const CARS_ENDPOINT = `http://localhost:6001/api/v1/cars/`;
+
+  const filteredCars = filterCity
+    ? cars.filter((car) =>
+        car.City.toLowerCase().includes(filterCity.toLowerCase())
+      )
+    : null;
+
+  const availableCities = Array.from(
+    new Set(cars.filter((car) => car.City).map((car) => car.City))
+  );
 
   const fetchCars = useCallback(async () => {
     // console.log('loading', loading);
@@ -272,6 +287,10 @@ export const CarsProvider = (props) => {
         addCar,
         updateCar,
         deleteCar,
+        availableCities,
+        filterCity,
+        setFilterCity,
+        filteredCars,
       }}
     >
       {props.children}

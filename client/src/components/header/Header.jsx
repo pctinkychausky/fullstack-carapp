@@ -5,7 +5,7 @@ import BasicDatePicker from "./BasicDatePicker/BasicDatePicker";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { CarsContext } from "../context/cars.Context";
+import { CarsContext } from "../../contexts/cars.context";
 
 function Header() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
