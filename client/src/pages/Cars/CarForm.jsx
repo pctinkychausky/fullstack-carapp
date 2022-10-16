@@ -97,10 +97,7 @@ function CarForm({ initialValues }) {
   };
 
   return (
-    <Card
-      sx={{ minWidth: 275, maxHeight: 900, boxShadow: 3 }}
-      className="card-container"
-    >
+    <Card sx={{ minWidth: 275, maxHeight: 900 }} className="card-container">
       <CardContent>
         <div>
           <FormProvider {...methods}>

@@ -5,6 +5,8 @@ import Carhire from "./pages/Carhire";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Contexts
 import { CarsProvider } from "./contexts/cars.context";
@@ -37,6 +39,7 @@ function App() {
           </Routes>
         </CarsProvider>
       </Router>
+      <ToastContainer />
     </div>
   );
 }

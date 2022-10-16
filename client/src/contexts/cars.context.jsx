@@ -1,4 +1,5 @@
 import React, { createContext, useState, useCallback } from "react";
+import { toast } from "react-toastify";
 // import { useToasts } from "react-toast-notifications";
 // import cloneDeep from 'lodash.cloneDeep' <-- use if your objects get complex
 
@@ -113,11 +114,31 @@ export const CarsProvider = (props) => {
         const newCars = [...cars, savedCar];
         localStorage.setItem("cars", JSON.stringify(newCars));
         setCars(newCars);
+        toast.success("Adding successfully!", {
+          position: "top-right",
+          autoClose: 400,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         // addToast(`Saved ${savedCar.name}`, {
         //   appearance: "success",
         // });
       } catch (err) {
         console.log(err);
+        toast.warn("Adding failed!", {
+          position: "top-right",
+          autoClose: 300,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         // addToast(`Error ${err.message || err.statusText}`, {
         //   appearance: "error",
         // });
@@ -173,9 +194,29 @@ export const CarsProvider = (props) => {
           updatedCars
         );
         setCars(updatedCars);
+        toast.success("Update successfully!", {
+          position: "top-right",
+          autoClose: 300,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       } catch (err) {
         console.log(err);
         setError(err);
+        toast.warn("Update failed!", {
+          position: "top-right",
+          autoClose: 300,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       }
     },
     [cars]

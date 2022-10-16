@@ -1,9 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import { CarsContext } from "../components/context/cars.Context";
+import { CarsContext } from "../contexts/cars.context";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/narbar/Narbar";
 import { useParams } from "react-router-dom";
 import CarForm from "./Cars/CarForm";
+import Button from "@mui/material/Button";
+import "./updatecar.css";
+import { NavLink } from "react-router-dom";
 
 function UpdateProducts() {
   let { id } = useParams();
@@ -23,7 +26,15 @@ function UpdateProducts() {
     <div className="App">
       <Navbar />
       <main>
-        <h2>Update Cars</h2>
+        <div className="update-header">
+          <h2>Update Cars</h2>
+          <NavLink to="/admin">
+            <Button variant="outlined" type="submit">
+              Back
+            </Button>{" "}
+          </NavLink>
+        </div>
+
         <CarForm initialValues={productToBeUpdated} />
       </main>
       <Footer />
