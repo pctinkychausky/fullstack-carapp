@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { CarsContext } from "../components/context/cars.Context";
+import { CarsContext } from "../contexts/cars.context";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/narbar/Narbar";
 import { useParams } from "react-router-dom";

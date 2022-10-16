@@ -5,9 +5,11 @@ import StarIcon from "@mui/icons-material/Star";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useContext } from "react";
 import { CarsContext } from "../../contexts/cars.context";
+import { ShoppingCartContext } from "../../contexts/shoppingCart.context";
 
 function CarList() {
   const { filteredCars } = useContext(CarsContext);
+  const { addItem } = useContext(ShoppingCartContext);
 
   return (
     <>
@@ -59,6 +61,7 @@ function CarList() {
                   <button
                     className="booking-click LeagueSpartan"
                     style={{ color: "#2d294b" }}
+                    onClick={() => addItem(product)}
                   >
                     Next Step
                   </button>

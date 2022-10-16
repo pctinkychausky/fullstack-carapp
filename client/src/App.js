@@ -8,6 +8,7 @@ import Admin from "./pages/Admin";
 
 // Contexts
 import { CarsProvider } from "./contexts/cars.context";
+import { ShoppingCartProvider } from "./contexts/shoppingCart.context";
 
 // Cars
 import CarList from "./pages/Cars/CarList";
@@ -21,6 +22,7 @@ function App() {
     <div className="App">
       <Router>
         <CarsProvider>
+          {/* <ShoppingCartProvider> */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/carhire" element={<Carhire />} />
@@ -35,6 +37,7 @@ function App() {
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
+          {/* </ShoppingCartProvider> */}
         </CarsProvider>
       </Router>
     </div>

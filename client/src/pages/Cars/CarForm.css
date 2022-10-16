@@ -7,6 +7,15 @@
 
 .card-container {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#root > div > div.table-container > div:nth-child(2) > div > div {
+  background-color: rgb(108, 219, 201, 0.5);
+}
+#root > div > div > main > div {
+  background-color: rgba(250, 213, 6, 0.8);
 }
 
 .imageUpload {
@@ -31,4 +40,10 @@ form {
 
 .textfield {
   margin-bottom: 20px;
+}
+
+.button {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-around;
 }

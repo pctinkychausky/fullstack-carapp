@@ -13,6 +13,7 @@ import CardContent from "@mui/material/CardContent";
 import { CarsContext } from "../../contexts/cars.context";
 import { useParams } from "react-router-dom";
 import "./CarForm.css";
+import { NavLink } from "react-router-dom";
 
 function CarForm({ initialValues }) {
   const { addCar, updateCar } = useContext(CarsContext);
@@ -243,7 +244,12 @@ function CarForm({ initialValues }) {
                   />
                 )}
               />
-              <div>
+              <div className="button">
+                <NavLink to="/admin">
+                  <Button variant="outlined" type="submit">
+                    back
+                  </Button>
+                </NavLink>
                 <Button
                   variant="outlined"
                   type="submit"
