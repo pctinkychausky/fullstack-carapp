@@ -16,6 +16,7 @@ export const CarsContext = createContext({
   setFilterCity: () => {},
   filteredCars: [],
   availableCities: [],
+  selectedDate: [],
 });
 
 export const CarsProvider = (props) => {
@@ -26,6 +27,7 @@ export const CarsProvider = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [filterCity, setFilterCity] = useState("");
+  const [selectedDate, setSelectedDate] = useState([]);
   // const [search, setSearch] = useState("");
   // const { addToast } = useToasts();  const [Make, setMake] = useState(cars.Make);
 
@@ -41,6 +43,17 @@ export const CarsProvider = (props) => {
 
   const availableCities = Array.from(
     new Set(cars.filter((car) => car.City).map((car) => car.City))
+  );
+
+  const addDate = useCallback(
+    async (date) => {
+      console.log("date", date);
+      const pickedDates = [...selectedDate, date];
+      console.log("pickedDates", pickedDates);
+
+      setSelectedDate(pickedDates);
+    },
+    [setSelectedDate]
   );
 
   const fetchCars = useCallback(async () => {
@@ -315,7 +328,7 @@ export const CarsProvider = (props) => {
     },
     [cars]
   );
-  console.log("🚀 cars11111111111111", cars);
+  console.log("🚀 cars in context", cars);
 
   return (
     <CarsContext.Provider
@@ -332,6 +345,7 @@ export const CarsProvider = (props) => {
         filterCity,
         setFilterCity,
         filteredCars,
+        addDate,
       }}
     >
       {props.children}

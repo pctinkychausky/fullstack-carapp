@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
@@ -6,7 +6,11 @@ import { useState } from "react";
 import { format } from "date-fns";
 import "./basicDatePicker.css";
 
-function BasicDatePicker() {
+function BasicDatePicker(props) {
+  console.log(
+    "🚀 ~ file: BasicDatePicker.jsx ~ line 10 ~ BasicDatePicker ~ props",
+    props.func
+  );
   const [openDate, setOpenDate] = useState(false);
 
   const [date, setDate] = useState([
@@ -22,6 +26,8 @@ function BasicDatePicker() {
     "MM/dd/yyyy"
   )}`;
 
+  // props.func(getDate(inputDate));
+
   // document.getElementById("dateEle").value = inputDate;
 
   return (
@@ -30,7 +36,7 @@ function BasicDatePicker() {
         onClick={() => setOpenDate(!openDate)}
         id="dateEle"
         type="text"
-        value=""
+        value={inputDate}
         placeholder={inputDate}
         className="DateSearchInput"
       />

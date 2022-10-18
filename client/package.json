@@ -37,6 +37,7 @@
     "highlight.js": "^10.0.3",
     "i": "^0.3.7",
     "jwks-rsa": "^2.1.4",
+    "localforage": "^1.10.0",
     "mdb-react-ui-kit": "^4.0.0",
     "nanoid": "^4.0.0",
     "next": "12.0.7",

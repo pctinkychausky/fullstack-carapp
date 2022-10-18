@@ -9,7 +9,7 @@ import { CarsContext } from "../../contexts/cars.context";
 
 function Header() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const { setFilterCity, availableCities } = useContext(CarsContext);
+  const { setFilterCity, availableCities, addDate } = useContext(CarsContext);
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const navigate = useNavigate();
