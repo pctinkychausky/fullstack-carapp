@@ -21,22 +21,23 @@ function Header() {
     selectedDate
   );
 
-  const startDate = `${format(selectedDate[0].startDate, "MM/dd/yyyy")}`;
-  console.log(
-    "🚀 ~ file: Header.jsx ~ line 25 ~ Header ~ startDate",
-    startDate
-  );
+  // const startDate = `${format(selectedDate[0].startDate, "MM/dd/yyyy")}`;
+  // console.log(
+  //   "🚀 ~ file: Header.jsx ~ line 25 ~ Header ~ startDate",
+  //   startDate
+  // );
 
-  const endDate = `${format(selectedDate[0].endDate, "MM/dd/yyyy")}`;
-  console.log("🚀 ~ file: Header.jsx ~ line 31 ~ Header ~ endDate", endDate);
+  // const endDate = `${format(selectedDate[0].endDate, "MM/dd/yyyy")}`;
+  // console.log("🚀 ~ file: Header.jsx ~ line 31 ~ Header ~ endDate", endDate);
 
   const submit = () => {
     if (isAuthenticated) {
       navigate(
         {
           pathname: "/carhire",
-          search: `?city=${searchKeyword}&startDate=${startDate}&endDateendDate
-        `,
+          search: `?city=${searchKeyword}`,
+          // search: `?city=${searchKeyword}&startDate=${startDate}&endDateendDate
+          // `,
         },
         { replace: true }
       );
