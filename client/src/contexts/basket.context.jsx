@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  useCallback,
-  useEffect,
-  useContext,
-} from "react";
+import React, { createContext, useState, useCallback, useEffect } from "react";
 import localForage from "localforage";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -57,12 +51,28 @@ export const BasketProvider = (props) => {
   }, [saveBasket, setItems]);
 
   const addItem = useCallback(
-    async (product) => {
+    async (product, mysearch) => {
+      let getparams = new URLSearchParams(document.location.search);
+      const showCity = getparams.get("city");
+      const showStartDate = getparams.get("startDate");
+      const showEndDate = getparams.get("endDate");
       console.log("items", items);
       console.log("product", product);
-      const newItems = [...items, product];
+      const orderPreview = {
+        ...product,
+        searchParams: {
+          city: showCity,
+          startDate: showStartDate,
+          endDate: showEndDate,
+        },
+      };
+      const newItems = [...items, orderPreview];
       console.log("newItems", newItems);
       saveBasket(newItems);
+      console.log(
+        "🚀 ~ file: basket.context.jsx ~ line 66 ~ saveBasket",
+        saveBasket
+      );
 
       setItems(newItems);
       console.log(

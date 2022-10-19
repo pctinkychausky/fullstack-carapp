@@ -7,7 +7,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import localForage from "localforage";
 
 function Basket() {
-  const { items, removeItem, reset, user } = useContext(BasketContext);
+  const { items, removeItem, user } = useContext(BasketContext);
+
+  // const getURL = async () => {
+  //   let getparams = new URLSearchParams(document.location.search);
+  //   const showCitytest = getparams.get("city");
+  //   console.log(
+  //     "🚀 ~ file: Header.jsx ~ line 55 ~ Header ~ showCitytest",
+  //     showCitytest
+  //   );
+  // };
+  // getURL();
 
   const product = items.map((entry) => {
     console.log("🚀 ~ file: Basket.jsx ~ line 10 ~ product ~ entry", entry);
@@ -34,40 +44,63 @@ function Basket() {
               <div className="details-top">
                 {/* <div>Booking reference:</div>
                 <div>Collection reference:</div> */}
-                <div>Booking date / time:</div>
+                <span className="booking-details-title">
+                  Booking date / time:
+                </span>
+                <span>
+                  {"  "}
+                  {entry.searchParams.startDate} to {entry.searchParams.endDate}
+                </span>
                 {/* <div>Booking status:</div> */}
                 <div>
-                  <span>Pick-up location:</span> <span></span>
+                  <span className="booking-details-title">
+                    Pick-up location:
+                  </span>{" "}
+                  <span>{entry.searchParams.city}</span>
                 </div>
                 <div>
-                  <span>Drop-off location:</span> <span></span>
+                  <span className="booking-details-title">
+                    Drop-off location:
+                  </span>{" "}
+                  <span>{entry.searchParams.city}</span>
                 </div>
                 <div>
-                  <span>Lead driver:</span> <span>{user.name}</span>
+                  <span className="booking-details-title">Lead driver:</span>{" "}
+                  <span>{user.name}</span>
                 </div>
                 <div>
-                  <span>Email:</span> <span>{user.email}</span>
+                  <span className="booking-details-title">Email:</span>{" "}
+                  <span>{user.email}</span>
                 </div>
               </div>
               <div className="details-bottom">
-                <div>Cancellation</div>
+                <div className="booking-details-title">Cancellation</div>
                 <div>
-                  <span>Cancellation Allowed:</span> <span>Yes</span>
+                  <span className="booking-details-title">
+                    Cancellation Allowed:
+                  </span>{" "}
+                  <span>Yes</span>
                 </div>
                 <div>
-                  <span>Cancellation Charges:</span> <span>No</span>
+                  <span className="booking-details-title">
+                    Cancellation Charges:
+                  </span>{" "}
+                  <span>No</span>
                 </div>
                 <div>
-                  <span>Refund Amount:</span> <span>£{entry.Price}</span>
+                  <span className="booking-details-title">Refund Amount:</span>{" "}
+                  <span>£{entry.Price}</span>
                 </div>
               </div>
 
               <div className="details-payment-status">
-                <div>Payment status: Un-paid</div>
+                <div className="booking-details-title">
+                  Payment status: Un-paid
+                </div>
               </div>
 
               <div>
-                <div>
+                <div className="booking-details-title">
                   This booking cannot be cancelled as it is less than 48 hours
                   before collection
                 </div>

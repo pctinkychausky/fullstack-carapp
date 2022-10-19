@@ -11,6 +11,10 @@ import { NavLink } from "react-router-dom";
 function CarList() {
   const { filteredCars } = useContext(CarsContext);
   const { addItem } = useContext(BasketContext);
+
+  console.log("current Pathname 👉️", window.location.pathname);
+  let mySearch = window.location.search;
+
   return (
     <>
       <div className="master-container">
@@ -58,11 +62,13 @@ function CarList() {
                   >
                     Email
                   </button>
-                  <NavLink to="/checkout">
+                  <NavLink
+                    to={{ pathname: "/checkout", search: `${mySearch}` }}
+                  >
                     <button
                       className="booking-click LeagueSpartan"
                       style={{ color: "#2d294b" }}
-                      onClick={() => addItem(entry)}
+                      onClick={() => addItem(entry, { mySearch })}
                     >
                       Next Step
                     </button>

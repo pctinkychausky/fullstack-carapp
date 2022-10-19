@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import BasicDatePicker from "./BasicDatePicker/BasicDatePicker";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import { CarsContext } from "../../contexts/cars.context";
 import localForage from "localforage";
 import { format } from "date-fns";
@@ -16,33 +16,23 @@ function Header() {
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const navigate = useNavigate();
-  console.log(
-    "🚀 ~ file: Header.jsx ~ line 15 ~ Header ~ selectedDate",
-    selectedDate
-  );
 
-  // const startDate = `${format(selectedDate[0].startDate, "MM/dd/yyyy")}`;
-  // console.log(
-  //   "🚀 ~ file: Header.jsx ~ line 25 ~ Header ~ startDate",
-  //   startDate
-  // );
-
-  // const endDate = `${format(selectedDate[0].endDate, "MM/dd/yyyy")}`;
-  // console.log("🚀 ~ file: Header.jsx ~ line 31 ~ Header ~ endDate", endDate);
+  const startDate = `${format(selectedDate[0].startDate, "MM/dd/yyyy")}`;
+  const endDate = `${format(selectedDate[0].endDate, "MM/dd/yyyy")}`;
 
   const submit = () => {
+    // const params = { city: `${searchKeyword}` };
     if (isAuthenticated) {
       navigate(
         {
           pathname: "/carhire",
-          search: `?city=${searchKeyword}`,
-          // search: `?city=${searchKeyword}&startDate=${startDate}&endDateendDate
-          // `,
+          // search: `?${createSearchParams(params)}`,
+          // search: `?city=${searchKeyword}`,
+          search: `?city=${searchKeyword}&startDate=${startDate}&endDate=${endDate}`,
         },
         { replace: true }
       );
       setFilterCity(searchKeyword);
-      localForage.setItem(`cityname`, searchKeyword);
     } else {
       loginWithRedirect();
     }

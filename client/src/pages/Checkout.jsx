@@ -1,13 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import { CarsContext } from "../contexts/cars.context";
+import React from "react";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/narbar/Narbar";
 import Basket from "../components/basket/Basket";
-import { useParams } from "react-router-dom";
-import CarForm from "./Cars/CarForm";
 import Button from "@mui/material/Button";
-import "./updatecar.css";
 import { NavLink } from "react-router-dom";
+import "./checkout.css";
 
 function Checkout() {
   // let { id } = useParams();
@@ -26,7 +23,7 @@ function Checkout() {
   return (
     <div className="App">
       <Navbar />
-      <main>
+      <main className="checkout-container">
         <div className="update-header">
           <h2>Checkout Basket</h2>
           <NavLink to="/carhire">
