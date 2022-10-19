@@ -83,6 +83,18 @@ const NavBar = () => {
                 Admin
               </DropdownItem>
               <DropdownItem
+                tag={RouterNavLink}
+                to="/checkout"
+                className="dropdown-profile"
+                activeClassName="router-link-exact-active"
+              >
+                {/* <FontAwesomeIcon
+                  icon="fa-solid fa-money-check-dollar-pen"
+                  className="mr-3"
+                /> */}
+                Basket
+              </DropdownItem>
+              <DropdownItem
                 id="qsLogoutBtn"
                 onClick={() => logoutWithRedirect()}
               >

@@ -1,13 +1,13 @@
 import React from "react";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/narbar/Narbar";
-import ShoppingCart from "../components/shoppingcart/ShoppingCart";
+import Basket from "../components/basket/Basket";
 
 function Cart() {
   return (
     <>
       <Navbar />
-      <ShoppingCart />
+      <Basket />
       <Footer />
     </>
   );

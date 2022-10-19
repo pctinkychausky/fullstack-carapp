@@ -5,12 +5,12 @@ import StarIcon from "@mui/icons-material/Star";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useContext } from "react";
 import { CarsContext } from "../../contexts/cars.context";
-import { ShoppingCartContext } from "../../contexts/shoppingCart.context";
+import { BasketContext } from "../../contexts/basket.context";
+import { NavLink } from "react-router-dom";
 
 function CarList() {
   const { filteredCars } = useContext(CarsContext);
-  const { addItem } = useContext(ShoppingCartContext);
-
+  const { addItem } = useContext(BasketContext);
   return (
     <>
       <div className="master-container">
@@ -58,13 +58,15 @@ function CarList() {
                   >
                     Email
                   </button>
-                  <button
-                    className="booking-click LeagueSpartan"
-                    style={{ color: "#2d294b" }}
-                    onClick={() => addItem(product)}
-                  >
-                    Next Step
-                  </button>
+                  <NavLink to="/checkout">
+                    <button
+                      className="booking-click LeagueSpartan"
+                      style={{ color: "#2d294b" }}
+                      onClick={() => addItem(entry)}
+                    >
+                      Next Step
+                    </button>
+                  </NavLink>
                 </div>
               </div>
               <div id="policy1" className="LeagueSpartan policy">

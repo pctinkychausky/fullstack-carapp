@@ -1,4 +1,5 @@
 import React, { createContext, useState, useCallback } from "react";
+import { toast } from "react-toastify";
 // import { useToasts } from "react-toast-notifications";
 // import cloneDeep from 'lodash.cloneDeep' <-- use if your objects get complex
 
@@ -15,6 +16,8 @@ export const CarsContext = createContext({
   setFilterCity: () => {},
   filteredCars: [],
   availableCities: [],
+  selectedDate: [],
+  addDate: () => {},
 });
 
 export const CarsProvider = (props) => {
@@ -25,8 +28,7 @@ export const CarsProvider = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [filterCity, setFilterCity] = useState("");
-  // const [search, setSearch] = useState("");
-  // const { addToast } = useToasts();  const [Make, setMake] = useState(cars.Make);
+  const [selectedDate, setSelectedDate] = useState([]);
 
   const [formMode, setFormMode] = useState("createMode");
 
@@ -64,7 +66,16 @@ export const CarsProvider = (props) => {
       console.log("err", err);
       setError(err);
     }
-  }, [setError, setLoading, setCars, error, loaded, loading]);
+  }, [
+    setError,
+    setLoading,
+    setCars,
+    error,
+    loaded,
+    loading,
+    cars,
+    CARS_ENDPOINT,
+  ]);
 
   // const fetchCars = useCallback(async () => {
   //   // console.log('loading', loading);
@@ -93,6 +104,14 @@ export const CarsProvider = (props) => {
   //   }
   // }, [error, loaded, loading]);
 
+  const addDate = useCallback(
+    async (date) => {
+      console.log(date);
+      setSelectedDate(date);
+    },
+    [filterCity]
+  );
+
   const addCar = useCallback(
     async (formData) => {
       console.log("about to add", formData);
@@ -113,17 +132,37 @@ export const CarsProvider = (props) => {
         const newCars = [...cars, savedCar];
         localStorage.setItem("cars", JSON.stringify(newCars));
         setCars(newCars);
+        toast.success("Adding successfully!", {
+          position: "top-right",
+          autoClose: 400,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         // addToast(`Saved ${savedCar.name}`, {
         //   appearance: "success",
         // });
       } catch (err) {
         console.log(err);
+        toast.warn("Adding failed!", {
+          position: "top-right",
+          autoClose: 300,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         // addToast(`Error ${err.message || err.statusText}`, {
         //   appearance: "error",
         // });
       }
     },
-    [cars]
+    [cars, CARS_ENDPOINT]
   );
 
   const updateCar = useCallback(
@@ -173,12 +212,32 @@ export const CarsProvider = (props) => {
           updatedCars
         );
         setCars(updatedCars);
+        toast.success("Update successfully!", {
+          position: "top-right",
+          autoClose: 300,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       } catch (err) {
         console.log(err);
         setError(err);
+        toast.warn("Update failed!", {
+          position: "top-right",
+          autoClose: 300,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       }
     },
-    [cars]
+    [cars, CARS_ENDPOINT]
   );
 
   // const updateCar = useCallback(
@@ -272,9 +331,8 @@ export const CarsProvider = (props) => {
         console.log(err);
       }
     },
-    [cars]
+    [cars, CARS_ENDPOINT]
   );
-  console.log("🚀 cars11111111111111", cars);
 
   return (
     <CarsContext.Provider
@@ -291,6 +349,8 @@ export const CarsProvider = (props) => {
         filterCity,
         setFilterCity,
         filteredCars,
+        addDate,
+        selectedDate,
       }}
     >
       {props.children}

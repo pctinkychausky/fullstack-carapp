@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import { useState } from "react";
 import { format } from "date-fns";
 import "./basicDatePicker.css";
+import { CarsContext } from "../../../contexts/cars.context";
 
 function BasicDatePicker() {
+  const { addDate } = useContext(CarsContext);
   const [openDate, setOpenDate] = useState(false);
-
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -21,8 +22,7 @@ function BasicDatePicker() {
     date[0].endDate,
     "MM/dd/yyyy"
   )}`;
-
-  // document.getElementById("dateEle").value = inputDate;
+  addDate(date);
 
   return (
     <>
@@ -30,7 +30,7 @@ function BasicDatePicker() {
         onClick={() => setOpenDate(!openDate)}
         id="dateEle"
         type="text"
-        value=""
+        value={inputDate}
         placeholder={inputDate}
         className="DateSearchInput"
       />
