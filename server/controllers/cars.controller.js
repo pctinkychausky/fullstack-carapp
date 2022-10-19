@@ -9,6 +9,7 @@ import Car from "../models/cars/car.model.js";
 
 export function getCar(req, res) {
   const carId = req.params.id;
+  console.log("🚀 ~ file: cars.controller.js ~ line 12 ~ getCar ~ req", req);
 
   Car.findById({ _id: carId }).exec((err, car) => {
     if (err) return res.status(500).send(err);

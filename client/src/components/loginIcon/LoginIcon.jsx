@@ -84,7 +84,7 @@ const NavBar = () => {
               </DropdownItem>
               <DropdownItem
                 tag={RouterNavLink}
-                to="/basket"
+                to="/checkout"
                 className="dropdown-profile"
                 activeClassName="router-link-exact-active"
               >

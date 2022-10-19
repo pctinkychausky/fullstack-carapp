@@ -17,6 +17,7 @@ export const CarsContext = createContext({
   filteredCars: [],
   availableCities: [],
   selectedDate: [],
+  addDate: () => {},
 });
 
 export const CarsProvider = (props) => {
@@ -28,8 +29,6 @@ export const CarsProvider = (props) => {
   const [error, setError] = useState(null);
   const [filterCity, setFilterCity] = useState("");
   const [selectedDate, setSelectedDate] = useState([]);
-  // const [search, setSearch] = useState("");
-  // const { addToast } = useToasts();  const [Make, setMake] = useState(cars.Make);
 
   const [formMode, setFormMode] = useState("createMode");
 
@@ -43,17 +42,6 @@ export const CarsProvider = (props) => {
 
   const availableCities = Array.from(
     new Set(cars.filter((car) => car.City).map((car) => car.City))
-  );
-
-  const addDate = useCallback(
-    async (date) => {
-      console.log("date", date);
-      const pickedDates = [...selectedDate, date];
-      console.log("pickedDates", pickedDates);
-
-      setSelectedDate(pickedDates);
-    },
-    [setSelectedDate]
   );
 
   const fetchCars = useCallback(async () => {
@@ -78,7 +66,16 @@ export const CarsProvider = (props) => {
       console.log("err", err);
       setError(err);
     }
-  }, [setError, setLoading, setCars, error, loaded, loading]);
+  }, [
+    setError,
+    setLoading,
+    setCars,
+    error,
+    loaded,
+    loading,
+    cars,
+    CARS_ENDPOINT,
+  ]);
 
   // const fetchCars = useCallback(async () => {
   //   // console.log('loading', loading);
@@ -106,6 +103,14 @@ export const CarsProvider = (props) => {
   //     setLoading(false);
   //   }
   // }, [error, loaded, loading]);
+
+  const addDate = useCallback(
+    async (date) => {
+      console.log(date);
+      setSelectedDate(date);
+    },
+    [filterCity]
+  );
 
   const addCar = useCallback(
     async (formData) => {
@@ -157,7 +162,7 @@ export const CarsProvider = (props) => {
         // });
       }
     },
-    [cars]
+    [cars, CARS_ENDPOINT]
   );
 
   const updateCar = useCallback(
@@ -232,7 +237,7 @@ export const CarsProvider = (props) => {
         });
       }
     },
-    [cars]
+    [cars, CARS_ENDPOINT]
   );
 
   // const updateCar = useCallback(
@@ -326,9 +331,8 @@ export const CarsProvider = (props) => {
         console.log(err);
       }
     },
-    [cars]
+    [cars, CARS_ENDPOINT]
   );
-  console.log("🚀 cars in context", cars);
 
   return (
     <CarsContext.Provider
@@ -346,6 +350,7 @@ export const CarsProvider = (props) => {
         setFilterCity,
         filteredCars,
         addDate,
+        selectedDate,
       }}
     >
       {props.children}

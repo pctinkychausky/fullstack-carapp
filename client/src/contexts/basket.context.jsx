@@ -16,6 +16,7 @@ export const BasketContext = createContext({
   items: [],
   reset: () => {},
   submitOrder: () => {},
+  pickedDate: [],
 });
 
 export const BasketProvider = (props) => {
@@ -25,6 +26,11 @@ export const BasketProvider = (props) => {
     user
   );
   const [items, setItems] = useState([]);
+  const [pickedDate, setPickedDate] = useState([]);
+  console.log(
+    "🚀 ~ file: basket.context.jsx ~ line 30 ~ BasketProvider ~ pickedDate",
+    pickedDate
+  );
 
   useEffect(() => {
     if (!user) return;
@@ -92,6 +98,7 @@ export const BasketProvider = (props) => {
         removeItem,
         reset,
         user,
+        setPickedDate,
       }}
     >
       {props.children}

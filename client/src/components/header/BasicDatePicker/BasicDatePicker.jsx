@@ -1,18 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import { useState } from "react";
 import { format } from "date-fns";
 import "./basicDatePicker.css";
+import { CarsContext } from "../../../contexts/cars.context";
 
-function BasicDatePicker(props) {
-  console.log(
-    "🚀 ~ file: BasicDatePicker.jsx ~ line 10 ~ BasicDatePicker ~ props",
-    props.func
-  );
+function BasicDatePicker() {
+  const { addDate } = useContext(CarsContext);
   const [openDate, setOpenDate] = useState(false);
-
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -25,10 +22,7 @@ function BasicDatePicker(props) {
     date[0].endDate,
     "MM/dd/yyyy"
   )}`;
-
-  // props.func(getDate(inputDate));
-
-  // document.getElementById("dateEle").value = inputDate;
+  addDate(date);
 
   return (
     <>

@@ -6,18 +6,42 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { CarsContext } from "../../contexts/cars.context";
+import localForage from "localforage";
+import { format } from "date-fns";
 
 function Header() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const { setFilterCity, availableCities, addDate } = useContext(CarsContext);
+  const { setFilterCity, availableCities, selectedDate } =
+    useContext(CarsContext);
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const navigate = useNavigate();
+  console.log(
+    "🚀 ~ file: Header.jsx ~ line 15 ~ Header ~ selectedDate",
+    selectedDate
+  );
+
+  const startDate = `${format(selectedDate[0].startDate, "MM/dd/yyyy")}`;
+  console.log(
+    "🚀 ~ file: Header.jsx ~ line 25 ~ Header ~ startDate",
+    startDate
+  );
+
+  const endDate = `${format(selectedDate[0].endDate, "MM/dd/yyyy")}`;
+  console.log("🚀 ~ file: Header.jsx ~ line 31 ~ Header ~ endDate", endDate);
 
   const submit = () => {
     if (isAuthenticated) {
-      navigate("/carhire", { replace: true });
+      navigate(
+        {
+          pathname: "/carhire",
+          search: `?city=${searchKeyword}&startDate=${startDate}&endDateendDate
+        `,
+        },
+        { replace: true }
+      );
       setFilterCity(searchKeyword);
+      localForage.setItem(`cityname`, searchKeyword);
     } else {
       loginWithRedirect();
     }

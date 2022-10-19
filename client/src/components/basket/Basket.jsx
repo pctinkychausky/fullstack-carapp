@@ -4,6 +4,7 @@ import "./basket.css";
 import { BasketContext } from "../../contexts/basket.context";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import localForage from "localforage";
 
 function Basket() {
   const { items, removeItem, reset, user } = useContext(BasketContext);
