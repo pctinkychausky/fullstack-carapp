@@ -2,13 +2,15 @@ import React, { useContext, useEffect } from "react";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import "./basket.css";
 import { BasketContext } from "../../contexts/basket.context";
+import { OrdersContext } from "../../contexts/orders.context";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import localForage from "localforage";
+import { NavLink } from "react-router-dom";
 
 function Basket() {
-  const { items, removeItem, user } = useContext(BasketContext);
-
+  const { items, removeItem, user, reset } = useContext(BasketContext);
+  const { addOrder } = useContext(OrdersContext);
   // const getURL = async () => {
   //   let getparams = new URLSearchParams(document.location.search);
   //   const showCitytest = getparams.get("city");
@@ -92,21 +94,36 @@ function Basket() {
                   <span>£{entry.Price}</span>
                 </div>
               </div>
-
               <div className="details-payment-status">
                 <div className="booking-details-title">
                   Payment status: Un-paid
                 </div>
               </div>
-
               <div>
                 <div className="booking-details-title">
                   This booking cannot be cancelled as it is less than 48 hours
                   before collection
                 </div>
-              </div>
+              </div>{" "}
             </div>
-          </div>
+          </div>{" "}
+          <NavLink to={{ pathname: "/orders" }}>
+            {/* <NavLink to={{ pathname: "/checkout", search: `${mySearch}` }}> */}
+            <button
+              className="booking-click LeagueSpartan"
+              style={{ color: "#2d294b" }}
+              onClick={() => {
+                addOrder(items);
+                console.log(
+                  "🚀 ~ file: Basket.jsx ~ line 117 ~ product ~ items",
+                  items
+                );
+                reset();
+              }}
+            >
+              Purchase Order
+            </button>
+          </NavLink>
         </div>
       </div>
     );

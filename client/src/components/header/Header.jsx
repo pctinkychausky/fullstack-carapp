@@ -17,18 +17,18 @@ function Header() {
 
   const navigate = useNavigate();
 
-  const startDate = `${format(selectedDate[0].startDate, "MM/dd/yyyy")}`;
-  const endDate = `${format(selectedDate[0].endDate, "MM/dd/yyyy")}`;
+  // const startDate = `${format(selectedDate[0].startDate, "MM/dd/yyyy")}`;
+  // const endDate = `${format(selectedDate[0].endDate, "MM/dd/yyyy")}`;
 
   const submit = () => {
-    // const params = { city: `${searchKeyword}` };
+    const params = { city: `${searchKeyword}` };
     if (isAuthenticated) {
       navigate(
         {
           pathname: "/carhire",
-          // search: `?${createSearchParams(params)}`,
+          search: `?${createSearchParams(params)}`,
           // search: `?city=${searchKeyword}`,
-          search: `?city=${searchKeyword}&startDate=${startDate}&endDate=${endDate}`,
+          // search: `?city=${searchKeyword}&startDate=${startDate}&endDate=${endDate}`,
         },
         { replace: true }
       );

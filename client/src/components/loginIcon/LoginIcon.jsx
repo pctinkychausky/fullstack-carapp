@@ -81,6 +81,18 @@ const NavBar = () => {
                   className="mr-3"
                 /> */}
                 Admin
+              </DropdownItem>{" "}
+              <DropdownItem
+                tag={RouterNavLink}
+                to="/orders"
+                className="dropdown-profile"
+                activeClassName="router-link-exact-active"
+              >
+                {/* <FontAwesomeIcon
+                  icon="fa-solid fa-money-check-dollar-pen"
+                  className="mr-3"
+                /> */}
+                Orders
               </DropdownItem>
               <DropdownItem
                 tag={RouterNavLink}

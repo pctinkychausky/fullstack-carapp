@@ -24,15 +24,18 @@ function Checkout() {
     <div className="App">
       <Navbar />
       <main className="checkout-container">
+        {" "}
+        <br></br>
         <div className="update-header">
           <h2>Checkout Basket</h2>
-          <NavLink to="/carhire">
+          <NavLink to="/checkout">
             <Button variant="outlined" type="submit">
               Back
             </Button>
           </NavLink>
         </div>
         <Basket />
+        <br></br> <br></br>
       </main>
       <Footer />
     </div>

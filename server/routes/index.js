@@ -1,5 +1,6 @@
 import path from "path";
 import carsRouter from "./cars.router.js";
+import ordersRouter from "./orders.router.js";
 import dotenv from "dotenv";
 import findConfig from "find-config";
 
@@ -13,6 +14,7 @@ export default function setupRoutes(app) {
 
   // Add routers (/api/v1/birds + url frag in router)
   app.use(`${API_ENDPOINT}/${API_VERSION}/cars`, carsRouter);
+  app.use(`${API_ENDPOINT}/${API_VERSION}/orders`, ordersRouter);
 
   // Handle non-API gets
   app.get("*", (req, res) => {

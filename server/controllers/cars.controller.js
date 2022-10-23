@@ -68,14 +68,14 @@ export function addCar(req, res) {
     if (err) return res.status(500).send(err);
     res.status(201).json(car);
   });
-  //   const birdData = req.body;
-  //   console.log(`birdData`, birdData);
-  //   const newBird = new Bird(birdData);
-  //   newBird.save((err, bird) => {
-  //     if (err) return errorHandler(res, err);
-  //     return res.status(201).json(bird);
-  //   });
 }
+//   const birdData = req.body;
+//   console.log(`birdData`, birdData);
+//   const newBird = new Bird(birdData);
+//   newBird.save((err, bird) => {
+//     if (err) return errorHandler(res, err);
+//     return res.status(201).json(bird);
+//   });
 
 // export function addOwnBird(req, res) {
 //   // { items: [{}, {}], customerID: '23k42lj34278' }
