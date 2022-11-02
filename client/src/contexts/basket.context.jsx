@@ -73,15 +73,11 @@ export const BasketProvider = (props) => {
         "🚀 ~ file: basket.context.jsx ~ line 66 ~ saveBasket",
         saveBasket
       );
-
       setItems(newItems);
-      console.log(
-        "🚀 🚀🚀~ file: basket.context.jsx ~ line 63 ~ setItems",
-        items
-      );
     },
     [items, saveBasket, setItems]
   );
+  console.log("🚀 🚀🚀~ file: basket.context.jsx ~ line 85 ~ setItems", items);
 
   const removeItem = useCallback(
     async (id) => {

@@ -95,6 +95,11 @@ export const OrdersProvider = (props) => {
       }
       const data = await response.json();
       setOrders(data);
+
+      console.log(
+        "🚀 ~ file: orders.context.jsx ~ line 98 ~ fetchOrders ~ data",
+        data
+      );
       // console.log('Orders from context', Orders);
     } catch (err) {
       console.log("err", err);
@@ -119,11 +124,18 @@ export const OrdersProvider = (props) => {
           },
           body: JSON.stringify({ items: itemIDs }),
         });
+        console.log(
+          "🚀 ~ file: orders.context.jsx ~ line 122 ~ response",
+          response
+        );
         if (response.status !== 201) {
           throw response;
         }
-
-        const savedOrder = await response.text();
+        console.log(
+          "🚀 ~ file: orders.context.jsx ~ line 130 ~ response",
+          response
+        );
+        const savedOrder = await response.JSON();
         // const savedOrder = await response.json();
 
         console.log("got data", savedOrder);
@@ -162,7 +174,7 @@ export const OrdersProvider = (props) => {
     async (id, updates) => {
       let newOrder = null;
       setLoading();
-      const { Orders } = state;
+      const { orders } = state;
       try {
         const response = await fetch(`${ORDERS_ENDPOINT}${id}`, {
           method: "PUT",
@@ -176,10 +188,10 @@ export const OrdersProvider = (props) => {
           throw response;
         }
         // Get index
-        const index = Orders.findIndex((Order) => Order._id === id);
+        const index = orders.findIndex((Order) => Order._id === id);
 
         // Get actual Order
-        const oldOrder = Orders[index];
+        const oldOrder = orders[index];
         console.log(
           "🚀 ~ file: Orders.context.js ~ line 95 ~ updateOrder ~ oldOrder",
           oldOrder
@@ -197,9 +209,9 @@ export const OrdersProvider = (props) => {
         );
         // recreate the Orders array
         const updatedOrders = [
-          ...Orders.slice(0, index),
+          ...orders.slice(0, index),
           newOrder,
-          ...Orders.slice(index + 1),
+          ...orders.slice(index + 1),
         ];
         console.log(
           "🚀 ~ file: Orders.context.js ~ line 120 ~ updatedOrders",
@@ -239,7 +251,9 @@ export const OrdersProvider = (props) => {
     async (id) => {
       let deletedOrder = null;
       setLoading();
-      const { Orders } = state;
+      const { orders } = state;
+      console.log("🚀 ~ file: orders.context.jsx ~ line 255 ~ orders", orders);
+
       try {
         const response = await fetch(`${ORDERS_ENDPOINT}${id}`, {
           method: "DELETE",
@@ -248,20 +262,30 @@ export const OrdersProvider = (props) => {
             // 'Content-Type': 'application/x-www-form-urlencoded',
           },
         });
+
         if (response.status !== 204) {
           throw response;
         }
+        console.log(
+          "🚀 ~ file: orders.context.jsx ~ line 267 ~ response",
+          response
+        );
         // Get index
-        const index = Orders.findIndex((Order) => Order._id === id);
-        deletedOrder = Orders[index];
+        const index = orders.findIndex((Order) => Order._id === id);
+        console.log("🚀 ~ file: orders.context.jsx ~ line 269 ~ index", index);
+        deletedOrder = orders[index];
+        console.log(
+          "🚀 ~ file: orders.context.jsx ~ line 271 ~ deletedOrder",
+          deletedOrder
+        );
         // recreate the Orders array without that Order
         const updatedOrders = [
-          ...Orders.slice(0, index),
-          ...Orders.slice(index + 1),
+          ...orders.slice(0, index),
+          ...orders.slice(index + 1),
         ];
         setOrders(updatedOrders);
 
-        toast.success(`Deleted ${deletedOrder.title}`, {
+        toast.success(`Deleted ${deletedOrder._id}`, {
           position: "top-right",
           autoClose: 400,
           hideProgressBar: false,
@@ -274,7 +298,7 @@ export const OrdersProvider = (props) => {
       } catch (err) {
         console.log(err);
         setError(err);
-        toast.warn(`Error: Failed to update ${deletedOrder.title}`, {
+        toast.warn(`Error: Failed to update ${deletedOrder._id}`, {
           position: "top-right",
           autoClose: 300,
           hideProgressBar: false,
@@ -286,7 +310,7 @@ export const OrdersProvider = (props) => {
         });
       }
     },
-    [toast, setError, setLoading, setOrders, state]
+    [toast, setError, setLoading, setOrders, state, orders]
   );
 
   return (

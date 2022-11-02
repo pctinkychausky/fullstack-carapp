@@ -5,11 +5,20 @@ import { OrdersContext } from "../../contexts/orders.context";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import localForage from "localforage";
+
 // import { formatPrice } from "./../../utils/utils";
 
 function OrdersDisplay() {
-  const { orders, loaded, fetchOrders, loading, error } =
-    useContext(OrdersContext);
+  const {
+    orders,
+    loaded,
+    fetchOrders,
+    loading,
+    error,
+    addOrder,
+    updateOrder,
+    deleteOrder,
+  } = useContext(OrdersContext);
 
   // console.log("orders", orders);
 
@@ -35,12 +44,16 @@ function OrdersDisplay() {
           <h2>Order ID: {_id}</h2>
           <ul className="order-list">
             {items.map(({ title, price, _id }) => (
-              <li key={_id}>
+              <li>
                 {/* {title} ({formatPrice(price)}) */}
                 {title} ({price})
               </li>
             ))}
           </ul>
+
+          <IconButton aria-label="delete" onClick={() => deleteOrder(_id)}>
+            <DeleteIcon />
+          </IconButton>
         </li>
       ))}
     </ul>

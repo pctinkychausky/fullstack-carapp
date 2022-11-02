@@ -26,7 +26,7 @@ function Basket() {
     return (
       <div>
         <div className="cart-container">
-          <div className="booking-title">
+          <div className="booking-title" key={entry.id}>
             <div>
               <span>
                 <PendingActionsIcon />
