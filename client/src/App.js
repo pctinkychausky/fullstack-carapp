@@ -20,6 +20,9 @@ import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
 
+//auth
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
+
 function App() {
   return (
     <div className="App">
@@ -34,7 +37,7 @@ function App() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/admin">
-                  <Route index element={<Admin />} />
+                  <Route index element={<PrivateRoute component={Admin} />} />
                   <Route path="add" element={<AddCar />} />
                   <Route path="update/:id" element={<UpdateCar />} />
                   <Route path="delete/:id" element={<DeleteCar />} />

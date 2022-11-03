@@ -2,6 +2,7 @@ import React, { createContext, useState, useCallback, useContext } from "react";
 // import { AuthContext } from "./auth.context";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
+import { BasketContext } from "../contexts/basket.context";
 
 let headers = {
   "Content-Type": "application/json",
@@ -107,11 +108,15 @@ export const OrdersProvider = (props) => {
     }
   }, [setError, setLoading, setOrders, state]);
 
+  const { user } = useAuth0();
+
   const addOrder = useCallback(
     async (items) => {
       const itemIDs = items.map((item) => item._id);
       console.log("itemIDs", itemIDs);
       console.log("headers", headers);
+
+      const customerIDs = user.sub;
 
       setLoading();
       const { orders } = state;
@@ -122,12 +127,9 @@ export const OrdersProvider = (props) => {
             "Content-Type": "application/json",
             // 'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: JSON.stringify({ items: itemIDs }),
+          body: JSON.stringify({ items: itemIDs, customerID: customerIDs }),
         });
-        console.log(
-          "🚀 ~ file: orders.context.jsx ~ line 122 ~ response",
-          response
-        );
+
         if (response.status !== 201) {
           throw response;
         }
@@ -135,8 +137,7 @@ export const OrdersProvider = (props) => {
           "🚀 ~ file: orders.context.jsx ~ line 130 ~ response",
           response
         );
-        const savedOrder = await response.JSON();
-        // const savedOrder = await response.json();
+        const savedOrder = await response.json();
 
         console.log("got data", savedOrder);
         setOrders([...orders, { ...savedOrder, items }]);

@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import "./ordersDisplay.css";
 import { OrdersContext } from "../../contexts/orders.context";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import localForage from "localforage";
+import Loading from "../loading/Loading";
 
 // import { formatPrice } from "./../../utils/utils";
 
@@ -39,18 +38,17 @@ function OrdersDisplay() {
 
   return (
     <ul>
-      {orders.map(({ _id, items = [] }) => (
-        <li key={_id}>
-          <h2>Order ID: {_id}</h2>
-          <ul className="order-list">
-            {items.map(({ title, price, _id }) => (
-              <li>
-                {/* {title} ({formatPrice(price)}) */}
-                {title} ({price})
-              </li>
+      {orders.map(({ _id, items = [], customerID, updatedAt }) => (
+        <li key={_id} className="order-row">
+          <div>Order ID: {_id}</div>{" "}
+          <div>
+            Price:
+            {items.map(({ title, Price, _id }) => (
+              <span>${Price}</span>
             ))}
-          </ul>
-
+          </div>
+          <div>Customer ID: {customerID}</div>
+          <div>Date: {new Date(updatedAt).toLocaleString("en-GB")}</div>
           <IconButton aria-label="delete" onClick={() => deleteOrder(_id)}>
             <DeleteIcon />
           </IconButton>
