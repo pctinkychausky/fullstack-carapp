@@ -21,7 +21,10 @@ import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
 
 //auth
-import PrivateRoute from "./components/privateRoute/PrivateRoute";
+import AdminRoute from "./components/SecuredRoute/AdminRoute";
+
+// OrderPermission,
+import { ProductPermission } from "./utils/constants";
 
 function App() {
   return (
@@ -37,7 +40,7 @@ function App() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/admin">
-                  <Route index element={<PrivateRoute component={Admin} />} />
+                  <Route index element={<AdminRoute component={Admin} />} />
                   <Route path="add" element={<AddCar />} />
                   <Route path="update/:id" element={<UpdateCar />} />
                   <Route path="delete/:id" element={<DeleteCar />} />

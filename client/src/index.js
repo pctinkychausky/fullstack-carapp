@@ -15,6 +15,8 @@ root.render(
       domain="dev-8mshccfr.us.auth0.com"
       clientId="YF5ryKC7mJQG1z4TxBM1mHEWXwbYDWUF"
       redirectUri={window.location.origin}
+      audience="http://fullstack-carapp/api"
+      scope="delete:products"
     >
       <App />
     </Auth0Provider>

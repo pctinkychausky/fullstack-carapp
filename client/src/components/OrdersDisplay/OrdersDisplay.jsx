@@ -40,7 +40,7 @@ function OrdersDisplay() {
     <ul>
       {orders.map(({ _id, items = [], customerID, updatedAt }) => (
         <li key={_id} className="order-row">
-          <div>Order ID: {_id}</div>{" "}
+          <div>Order ID:{_id}</div>
           <div>
             Price:
             {items.map(({ title, Price, _id }) => (

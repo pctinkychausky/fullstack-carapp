@@ -30,6 +30,7 @@
     "date-fns": "^2.28.0",
     "dotenv": "^16.0.2",
     "express-jwt": "^7.7.5",
+    "express-jwt-authz": "^2.4.1",
     "find-config": "^1.0.0",
     "flag-icon-css": "^4.1.7",
     "flag-icons": "^6.6.0",

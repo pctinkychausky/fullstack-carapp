@@ -3,7 +3,8 @@
   justify-content: space-around;
   align-items: center;
   /* padding-inline: 500px; */
-  font-size: small;
+  font-size: large;
+  min-height: 10vh;
 }
 
 li {

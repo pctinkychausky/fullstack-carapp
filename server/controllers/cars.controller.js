@@ -93,7 +93,10 @@ export function updateCar(req, res) {
   const updates = req.body;
 
   Car.updateOne({ _id: carId }, updates, (err) => {
-    if (err) return res.status(500).send(err);
+    if (err)
+      return res
+        .status(500)
+        .send(err, { msg: "You called the protected endpoint!" });
     res.sendStatus(200);
   });
   //   Bird.updateOne({ _id: req.params.id }, req.body, function (err, result) {

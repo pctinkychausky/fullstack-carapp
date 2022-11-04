@@ -1,7 +1,13 @@
 import React, { createContext, useState, useCallback } from "react";
 import { toast } from "react-toastify";
+import { useAuth0 } from "@auth0/auth0-react";
 // import { useToasts } from "react-toast-notifications";
 // import cloneDeep from 'lodash.cloneDeep' <-- use if your objects get complex
+
+let headers = {
+  "Content-Type": "application/json",
+  // 'Content-Type': 'application/x-www-form-urlencoded',
+};
 
 export const CarsContext = createContext({
   fetchCars: () => [],
@@ -30,7 +36,8 @@ export const CarsProvider = (props) => {
   const [filterCity, setFilterCity] = useState("");
   const [selectedDate, setSelectedDate] = useState([]);
 
-  const [formMode, setFormMode] = useState("createMode");
+  //auth0
+  const { getAccessTokenSilently } = useAuth0();
 
   const CARS_ENDPOINT = `http://localhost:6001/api/v1/cars/`;
 
@@ -52,7 +59,7 @@ export const CarsProvider = (props) => {
       return;
     }
 
-    setLoading();
+    setLoading(true);
 
     try {
       const response = await fetch(CARS_ENDPOINT);
@@ -65,6 +72,9 @@ export const CarsProvider = (props) => {
     } catch (err) {
       console.log("err", err);
       setError(err);
+    } finally {
+      setLoaded(true);
+      setLoading(false);
     }
   }, [
     setError,
@@ -73,36 +83,8 @@ export const CarsProvider = (props) => {
     error,
     loaded,
     loading,
-    cars,
-    CARS_ENDPOINT,
+    getAccessTokenSilently,
   ]);
-
-  // const fetchCars = useCallback(async () => {
-  //   // console.log('loading', loading);
-  //   // console.log('error', error);
-  //   if (loading || loaded || error) {
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   try {
-  //     const response = await fetch(CARS_ENDPOINT);
-  //     if (response.status !== 200) {
-  //       throw response;
-  //     }
-  //     const data = await response.json();
-  //     console.log(
-  //       "🚀 ~ file: cars.context.jsx ~ line 43 ~ fetchCars ~ data",
-  //       data
-  //     );
-  //     localStorage.setItem("cars", JSON.stringify(data));
-  //     setCars(data);
-  //   } catch (err) {
-  //     setError(err.message || err.statusText);
-  //   } finally {
-  //     setLoaded(true);
-  //     setLoading(false);
-  //   }
-  // }, [error, loaded, loading]);
 
   const addDate = useCallback(
     async (date) => {
@@ -115,11 +97,13 @@ export const CarsProvider = (props) => {
   const addCar = useCallback(
     async (formData) => {
       console.log("about to add", formData);
+      setLoading(true);
       try {
         const response = await fetch(CARS_ENDPOINT, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+
             // 'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: JSON.stringify(formData),
@@ -160,14 +144,26 @@ export const CarsProvider = (props) => {
         // addToast(`Error ${err.message || err.statusText}`, {
         //   appearance: "error",
         // });
+      } finally {
+        setLoaded(true);
+        setLoading(false);
       }
     },
-    [cars, CARS_ENDPOINT]
+    [
+      cars,
+      CARS_ENDPOINT,
+      setLoading,
+      error,
+      loaded,
+      loading,
+      getAccessTokenSilently,
+    ]
   );
 
   const updateCar = useCallback(
     async (id, updates) => {
       let newCar = null;
+      setLoading(true);
 
       try {
         const response = await fetch(`${CARS_ENDPOINT}${id}`, {
@@ -235,82 +231,39 @@ export const CarsProvider = (props) => {
           progress: undefined,
           theme: "dark",
         });
+      } finally {
+        setLoaded(true);
+        setLoading(false);
       }
     },
-    [cars, CARS_ENDPOINT]
+    [
+      setError,
+      setLoading,
+      setCars,
+      loading,
+      loaded,
+      error,
+      getAccessTokenSilently,
+    ]
   );
-
-  // const updateCar = useCallback(
-  //   async (id, formData) => {
-  //     // console.log("updating", id, formData);
-  //     let updatedCar = null;
-  //     // Get index
-  //     const index = cars.findIndex((car) => car._id === id);
-  //     console.log(index);
-  //     if (index === -1) throw new Error(`Car with index ${id} not found`);
-  //     // Get actual car
-  //     const oldCar = cars[index];
-  //     console.log("oldCar", oldCar);
-
-  //     // Send the differences, not the whole update
-  //     const updates = {};
-
-  //     for (const key of Object.keys(oldCar)) {
-  //       if (key === "_id") continue;
-  //       if (oldCar[key] !== formData[key]) {
-  //         updates[key] = formData[key];
-  //       }
-  //     }
-
-  //     try {
-  //       const response = await fetch(`${CARS_ENDPOINT}${id}`, {
-  //         method: "PUT",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           // 'Content-Type': 'application/x-www-form-urlencoded',
-  //         },
-  //         body: JSON.stringify(updates),
-  //       });
-
-  //       if (response.status !== 200) {
-  //         throw response;
-  //       }
-
-  //       // Merge with formData
-  //       updatedCar = {
-  //         ...oldCar,
-  //         ...formData, // order here is important for the override!!
-  //       };
-  //       console.log("updatedCar", updatedCar);
-  //       // recreate the cars array
-  //       const updatedCars = [
-  //         ...cars.slice(0, index),
-  //         updatedCar,
-  //         ...cars.slice(index + 1),
-  //       ];
-  //       localStorage.setItem("cars", JSON.stringify(updatedCars));
-  //       // addToast(`Updated ${updatedCar.name}`, {
-  //       //   appearance: "success",
-  //       // });
-  //       setCars(updatedCars);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   },
-  //   [cars]
-  // );
 
   const deleteCar = useCallback(
     async (id) => {
       console.log("🚀 ~ file: cars.context.jsx ~ line 155 ~ id", id);
       let deletedCar = null;
+      setLoading(true);
       try {
+        const token = await getAccessTokenSilently({
+          audience: "http://fullstack-carapp/api",
+          scope: "delete:products",
+        });
+        console.log("🚀 ~ file: cars.context.jsx ~ line 317 ~ token", token);
+
         const response = await fetch(`${CARS_ENDPOINT}${id}`, {
           method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-          },
+          headers: token
+            ? { ...headers, Authorization: `Bearer ${token}` }
+            : headers,
         });
 
         if (response.status !== 204) {
@@ -329,9 +282,20 @@ export const CarsProvider = (props) => {
         // });
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoaded(true);
+        setLoading(false);
       }
     },
-    [cars, CARS_ENDPOINT]
+    [
+      cars,
+      CARS_ENDPOINT,
+      setLoading,
+      error,
+      loaded,
+      loading,
+      getAccessTokenSilently,
+    ]
   );
 
   return (

@@ -4,23 +4,22 @@ import { CarsContext } from "../../contexts/cars.context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import "./CarList.css";
+import Loading from "../../components/loading/Loading";
 
 function CarList() {
   const navigate = useNavigate();
-  const { cars, loading, error, fetchCars, deleteCar, EditHandler } =
+  const { cars, loading, loaded, error, fetchCars, deleteCar, EditHandler } =
     useContext(CarsContext);
 
   useEffect(() => {
-    fetchCars();
+    if (!loaded) {
+      fetchCars();
+    }
   }, []);
 
   return (
     <>
-      {loading && (
-        <Box sx={{ display: "flex" }}>
-          <CircularProgress />
-        </Box>
-      )}
+      {!loaded && <Loading />}
 
       <div>
         <table>

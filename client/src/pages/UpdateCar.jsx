@@ -7,6 +7,7 @@ import CarForm from "./Cars/CarForm";
 import Button from "@mui/material/Button";
 import "./updatecar.css";
 import { NavLink } from "react-router-dom";
+import Loading from "../components/loading/Loading";
 
 function UpdateProducts() {
   let { id } = useParams();
@@ -28,11 +29,15 @@ function UpdateProducts() {
       <main>
         <div className="update-header">
           <h2>Update Cars</h2>
-          <NavLink to="/admin">
-            <Button variant="outlined" type="submit">
-              Back
-            </Button>{" "}
-          </NavLink>
+          {!loaded ? (
+            <Loading />
+          ) : (
+            <NavLink to="/admin">
+              <Button variant="outlined" type="submit">
+                Back
+              </Button>{" "}
+            </NavLink>
+          )}
         </div>
 
         <CarForm initialValues={productToBeUpdated} />

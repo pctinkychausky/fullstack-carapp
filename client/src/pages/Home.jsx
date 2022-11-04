@@ -9,7 +9,6 @@ function Carhire() {
   return (
     <>
       <Navbar />
-
       <Header />
       <MiddleSection />
       <Newsletter />

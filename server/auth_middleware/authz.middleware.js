@@ -1,7 +1,8 @@
+import dotenv from "dotenv";
+import "dotenv/config";
 import findConfig from "find-config";
-import { expressjwt as jwt } from "express-jwt";
+import { expressjwt } from "express-jwt";
 import jwksRsa from "jwks-rsa";
-// const logger = require("./../logger");
 
 dotenv.config({ path: findConfig(".env") });
 
@@ -10,7 +11,7 @@ const { AUTH0_DOMAIN, AUTH0_AUDIENCE } = process.env;
 console.log("AUTH0_DOMAIN", AUTH0_DOMAIN);
 console.log("AUTH0_AUDIENCE", AUTH0_AUDIENCE);
 
-export const checkJwt = jwt({
+export const authorizeAccessToken = expressjwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,

@@ -71,21 +71,9 @@ function CarForm({ initialValues }) {
     if (populated) {
       const updates = {};
       for (const key in initialValues) {
-        console.log(
-          "🚀 ~ file: ProductForm.jsx ~ line 88 ~ onSubmit ~ initialValues",
-          initialValues
-        );
         if (initialValues.hasOwnProperty(key)) {
           if (initialValues[key] !== formValues[key] && key[0] !== "_") {
-            console.log(
-              "🚀 ~ file: ProductForm.jsx ~ line 94 ~ onSubmit ~ initialValues[key]",
-              initialValues[key]
-            );
             updates[key] = formValues[key];
-            console.log(
-              "🚀 ~ file: ProductForm.jsx ~ line 99 ~ onSubmit ~ updates[key]",
-              updates[key]
-            );
           }
         }
       }

@@ -1,6 +1,7 @@
 import path from "path";
 import express from "express";
-
+import { checkPermissions } from "../auth_middleware/permissions.middleware.js";
+import { authorizeAccessToken } from "../auth_middleware/authz.middleware.js";
 import {
   getCar,
   getCars,
@@ -20,6 +21,6 @@ router
   .get("/:id?", getCar)
   .post("/", addCar)
   .put("/:id", updateCar)
-  .delete("/:id", removeCar);
+  .delete("/:id", authorizeAccessToken, checkPermissions, removeCar);
 
 export default router;
