@@ -17,6 +17,7 @@
     "start:both:dev": "concurrently \"npm run start:server:dev\" \"set port=3006 && npm run client\" ",
     "start:both:prod": "concurrently \"npm run start:server:prod\" \"npm run start:client:prod\"",
     "heroku-postbuild": "npm run install:both && npm run build:client",
+    "netlify-postbuild": "npm run install:both && npm run build:client",
     "start": "npm run start:server:prod"
   },
   "author": "",
