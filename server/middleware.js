@@ -20,7 +20,7 @@ const { NODE_ENV = "development" } = process.env;
 export default function middlewareSetup(app) {
   // In dev mode, react-server serves the files BUT in production we BUILD the react project and express serves it out of the build folder
   if (NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../client/", "dist")));
+    app.use(express.static(path.join(__dirname, "../client/", "build")));
     app.use(compression());
   }
 
@@ -34,6 +34,9 @@ export default function middlewareSetup(app) {
   // app.use(helmet());
   // CORS to make our API public
   app.use(cors());
+
+  // Pick up React index.html file
+  // app.use(express.static(path.join(__dirname, "../client/build")));
 
   // http logging
   // app.use(morgan("dev"));
