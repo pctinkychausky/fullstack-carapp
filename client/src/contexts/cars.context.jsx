@@ -4,11 +4,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 // import { useToasts } from "react-toast-notifications";
 // import cloneDeep from 'lodash.cloneDeep' <-- use if your objects get complex
 
-let headers = {
-  "Content-Type": "application/json",
-  // 'Content-Type': 'application/x-www-form-urlencoded',
-};
-
 export const CarsContext = createContext({
   fetchCars: () => [],
   addCar: () => {},
@@ -257,13 +252,17 @@ export const CarsProvider = (props) => {
           audience: "http://fullstack-carapp/api",
           scope: "delete:products",
         });
-        console.log("🚀 ~ file: cars.context.jsx ~ line 317 ~ token", token);
+        console.log(
+          "🚀🚀🚀 ~ file: cars.context.jsx ~ line 317 ~ token",
+          token
+        );
 
         const response = await fetch(`${CARS_ENDPOINT}${id}`, {
           method: "DELETE",
-          headers: token
-            ? { ...headers, Authorization: `Bearer ${token}` }
-            : headers,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         });
 
         if (response.status !== 204) {
