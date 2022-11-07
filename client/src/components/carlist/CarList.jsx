@@ -15,6 +15,10 @@ function CarList() {
 
   console.log("current Pathname 👉️", window.location.pathname);
   let mySearch = window.location.search;
+  console.log(
+    "🚀🚀🚀🚀🚀🚀 ~ file: CarList.jsx ~ line 18 ~ CarList ~ loaded",
+    loaded
+  );
 
   return (
     <>

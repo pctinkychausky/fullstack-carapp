@@ -49,7 +49,7 @@ export const CarsProvider = (props) => {
   const fetchCars = useCallback(async () => {
     // console.log('loading', loading);
     // console.log('error', error);
-
+    console.log("hello");
     if (loading || loaded || error) {
       return;
     }

@@ -41,6 +41,7 @@ function App() {
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/admin">
                   <Route index element={<AdminRoute component={Admin} />} />
+                  {/* <Route index element={<Admin />} /> */}
                   <Route path="add" element={<AddCar />} />
                   <Route path="update/:id" element={<UpdateCar />} />
                   <Route path="delete/:id" element={<DeleteCar />} />

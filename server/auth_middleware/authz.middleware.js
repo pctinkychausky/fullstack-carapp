@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import "dotenv/config";
 import findConfig from "find-config";
-import { expressjwt } from "express-jwt";
+import expressjwt from "express-jwt";
 import jwksRsa from "jwks-rsa";
 
 dotenv.config({ path: findConfig(".env") });

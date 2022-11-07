@@ -11,7 +11,7 @@ import { format } from "date-fns";
 
 function Header() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const { setFilterCity, availableCities, selectedDate } =
+  const { fetchCars, setFilterCity, availableCities, selectedDate } =
     useContext(CarsContext);
   const [searchKeyword, setSearchKeyword] = useState("");
 
@@ -32,6 +32,8 @@ function Header() {
         },
         { replace: true }
       );
+
+      fetchCars();
       setFilterCity(searchKeyword);
     } else {
       loginWithRedirect();
