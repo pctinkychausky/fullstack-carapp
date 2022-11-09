@@ -1,9 +1,9 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { Auth0Provider, withAuthenticationRequired } from "@auth0/auth0-react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const PrivateRoute = ({ component }) => {
+const PrivateRoute = ({ component, children, ...props }) => {
   let authd = false;
   const { user } = useAuth0();
   if (user) {

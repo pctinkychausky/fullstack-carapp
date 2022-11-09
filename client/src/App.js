@@ -39,14 +39,17 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/orders" element={<Orders />} />
-                <Route path="/admin">
-                  <Route index element={<AdminRoute component={Admin} />} />
-                  {/* <Route index element={<Admin />} /> */}
-                  <Route path="add" element={<AddCar />} />
-                  <Route path="update/:id" element={<UpdateCar />} />
-                  <Route path="delete/:id" element={<DeleteCar />} />
-                  <Route path="*" element={<NotFound />} />
-                </Route>
+
+                <Route
+                  path="/admin"
+                  element={<AdminRoute component={Admin} />}
+                />
+                {/* <Route index element={<Admin />} /> */}
+                <Route path="/admin/add" element={<AddCar />} />
+                <Route path="/admin/update/:id" element={<UpdateCar />} />
+                <Route path="/admin/delete/:id" element={<DeleteCar />} />
+                <Route path="/admin/*" element={<NotFound />} />
+
                 <Route path="*" element={<NotFound />} />
               </Routes>{" "}
             </BasketProvider>{" "}

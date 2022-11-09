@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CarsContext } from "../../contexts/cars.context";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 import "./CarList.css";
 import Loading from "../../components/loading/Loading";
 

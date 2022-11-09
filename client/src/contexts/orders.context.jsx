@@ -106,17 +106,22 @@ export const OrdersProvider = (props) => {
       console.log("err", err);
       setError(err);
     }
-  }, [setError, setLoading, setOrders, state]);
-
-  const { user } = useAuth0();
+  }, [setError, setLoading, setOrders, state, orders]);
 
   const addOrder = useCallback(
-    async (items) => {
+    async (items, user) => {
+      console.log("🚀🚀 ~ file: orders.context.jsx ~ line 113 ~ user", user);
+      console.log("🚀🚀 ~ file: orders.context.jsx ~ line 113 ~ items", items);
       const itemIDs = items.map((item) => item._id);
-      console.log("itemIDs", itemIDs);
-      console.log("headers", headers);
-
+      console.log(
+        "🚀 ~ file: orders.context.jsx ~ line 116 ~ itemIDs",
+        itemIDs
+      );
       const customerIDs = user.sub;
+      console.log(
+        "🚀 ~ file: orders.context.jsx ~ line 118 ~ customerIDs",
+        customerIDs
+      );
 
       setLoading();
       const { orders } = state;
@@ -127,20 +132,29 @@ export const OrdersProvider = (props) => {
             "Content-Type": "application/json",
             // 'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: JSON.stringify({ items: itemIDs, customerID: customerIDs }),
+          body: JSON.stringify({
+            items: itemIDs,
+            customerID: customerIDs,
+          }),
         });
-
-        if (response.status !== 201) {
+        console.log("The response is", response);
+        // Checks negative API call status
+        if (!response.ok) {
           throw response;
         }
-        console.log(
-          "🚀 ~ file: orders.context.jsx ~ line 130 ~ response",
-          response
-        );
+
         const savedOrder = await response.json();
+        console.log(
+          "🚀 ~ file: orders.context.jsx ~ line 139 ~ savedOrder",
+          savedOrder
+        );
 
         console.log("got data", savedOrder);
         setOrders([...orders, { ...savedOrder, items }]);
+        console.log(
+          "🚀🚀🚀🚀🚀🚀 ~ file: orders.context.jsx ~ line 154 ~ orders",
+          orders
+        );
 
         toast.success("Order successful!", {
           position: "top-right",
@@ -153,7 +167,7 @@ export const OrdersProvider = (props) => {
           theme: "dark",
         });
       } catch (err) {
-        console.log(err);
+        console.log("info error occurred", err);
         setState(err);
 
         toast.warn(`Error ${err.message || err.statusText}`, {
@@ -168,7 +182,7 @@ export const OrdersProvider = (props) => {
         });
       }
     },
-    [toast, setLoading, setOrders, state]
+    [toast, setLoading, setOrders, state, orders]
   );
 
   const updateOrder = useCallback(
@@ -245,7 +259,7 @@ export const OrdersProvider = (props) => {
         });
       }
     },
-    [toast, setError, setLoading, setOrders, state]
+    [toast, setError, setLoading, setOrders, state, orders]
   );
 
   const deleteOrder = useCallback(
@@ -264,13 +278,10 @@ export const OrdersProvider = (props) => {
           },
         });
 
-        if (response.status !== 204) {
+        if (!response.ok) {
           throw response;
         }
-        console.log(
-          "🚀 ~ file: orders.context.jsx ~ line 267 ~ response",
-          response
-        );
+
         // Get index
         const index = orders.findIndex((Order) => Order._id === id);
         console.log("🚀 ~ file: orders.context.jsx ~ line 269 ~ index", index);
@@ -297,7 +308,7 @@ export const OrdersProvider = (props) => {
           theme: "dark",
         });
       } catch (err) {
-        console.log(err);
+        console.log("Fail to delete:", err);
         setError(err);
         toast.warn(`Error: Failed to update ${deletedOrder._id}`, {
           position: "top-right",

@@ -28,7 +28,7 @@ function Checkout() {
         <br></br>
         <div className="update-header">
           <h2>Checkout Basket</h2>
-          <NavLink to="/checkout">
+          <NavLink to="/carhire">
             <Button variant="outlined" type="submit">
               Back
             </Button>

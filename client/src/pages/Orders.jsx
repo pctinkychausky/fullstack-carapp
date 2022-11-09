@@ -13,7 +13,7 @@ function Checkout() {
       <main className="order-container">
         <div className="update-header">
           <h2>Order Summary</h2>
-          <NavLink to="/carhire">
+          <NavLink to="/">
             <Button variant="outlined" type="submit">
               Back
             </Button>

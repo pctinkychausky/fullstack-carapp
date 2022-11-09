@@ -280,7 +280,20 @@ export const CarsProvider = (props) => {
         //   appearance: "success",
         // });
       } catch (err) {
-        console.log(err);
+        console.log("err", err);
+        toast.success(
+          `${err.statusText}! Only senior admin is allowed to delete products`,
+          {
+            position: "top-right",
+            autoClose: 1800,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          }
+        );
       } finally {
         setLoaded(true);
         setLoading(false);

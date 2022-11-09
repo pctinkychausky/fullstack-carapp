@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./LoginIcon.css";
+import { CarsContext } from "../../contexts/cars.context";
 
 import {
-  Collapse,
-  Container,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -22,8 +18,11 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 
 const NavBar = () => {
+  const { loaded, fetchCars } = useContext(CarsContext);
+
   const [isOpen, setIsOpen] = useState(false);
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutWithRedirect = () =>
@@ -70,18 +69,16 @@ const NavBar = () => {
                 Profile
                 {/* <FontAwesomeIcon icon="user" className="mr-3" /> Profile */}
               </DropdownItem>
-              <DropdownItem
-                tag={RouterNavLink}
-                to="/admin"
-                className="dropdown-profile"
-                activeClassName="router-link-exact-active"
-              >
-                {/* <FontAwesomeIcon
-                  icon="fa-solid fa-money-check-dollar-pen"
-                  className="mr-3"
-                /> */}
-                Admin
-              </DropdownItem>{" "}
+              {user["http://localhost:3000/roles"].length > 0 && (
+                <DropdownItem
+                  tag={RouterNavLink}
+                  to="/admin"
+                  className="dropdown-profile"
+                  activeClassName="router-link-exact-active"
+                >
+                  Admin
+                </DropdownItem>
+              )}
               <DropdownItem
                 tag={RouterNavLink}
                 to="/orders"
