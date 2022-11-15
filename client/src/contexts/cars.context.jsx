@@ -34,7 +34,7 @@ export const CarsProvider = (props) => {
   //auth0
   const { getAccessTokenSilently } = useAuth0();
 
-  const CARS_ENDPOINT = `http://localhost:6001/api/v1/cars/`;
+  const CARS_ENDPOINT = `${window.location.origin}/api/v1/cars/`;
 
   const filteredCars = filterCity
     ? cars.filter((car) =>

@@ -10,7 +10,7 @@ let headers = {
   // 'Content-Type': 'application/x-www-form-urlencoded',
 };
 
-const ORDERS_ENDPOINT = `http://localhost:6001/api/v1/orders/`;
+const ORDERS_ENDPOINT = `${window.location.origin}/api/v1/orders/`;
 
 export const OrdersContext = createContext({
   fetchOrders: () => [],
