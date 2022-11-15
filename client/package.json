@@ -36,6 +36,7 @@
     "flag-icons": "^6.6.0",
     "fullstack-carapp": "file:..",
     "highlight.js": "^10.0.3",
+    "http-proxy-middleware": "^2.0.6",
     "i": "^0.3.7",
     "jwks-rsa": "^2.1.4",
     "localforage": "^1.10.0",
@@ -61,7 +62,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preview": "react-scripts preview"
   },
   "eslintConfig": {
     "extends": [
