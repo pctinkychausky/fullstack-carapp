@@ -15,7 +15,8 @@ img {
   font-size: 1.25rem;
 }
 
-nav {
+.awardBar > nav > ul > li:nth-child(1) > img {
+  width: 80%;
 }
 
 nav ul {
@@ -39,4 +40,19 @@ nav ul {
 .awardBar2 > nav > ul > li > img {
   width: 83px;
   height: 30px;
+}
+
+@media (min-width: 1024px) {
+  .awardBar {
+    padding-inline: 5%;
+    align-items: baseline;
+  }
+
+  .awardBar2 {
+    padding-inline: 5%;
+  }
+
+  .awardBar2 > h3 {
+    font-size: 130%;
+  }
 }

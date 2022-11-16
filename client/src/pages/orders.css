@@ -1,4 +1,17 @@
 .order-container {
   background-color: rgb(245, 222, 13);
-  overflow: hidden;
+  min-height: 80vh;
+  overflow: auto;
+}
+
+@media screen and (min-width: 1024px) {
+  .order-container {
+    min-height: 30vh;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .order-container {
+    min-height: 47vh;
+  }
 }

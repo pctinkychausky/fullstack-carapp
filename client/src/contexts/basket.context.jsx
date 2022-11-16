@@ -68,6 +68,10 @@ export const BasketProvider = (props) => {
       };
       const newItems = [...items, orderPreview];
       console.log("newItems", newItems);
+      const newItemsLength = newItems.length;
+      if (newItemsLength > 1) {
+        newItems.splice(1, newItemsLength - 1);
+      }
       saveBasket(newItems);
       console.log(
         "🚀 ~ file: basket.context.jsx ~ line 66 ~ saveBasket",

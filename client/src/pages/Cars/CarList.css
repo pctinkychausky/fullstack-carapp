@@ -17,3 +17,88 @@
 .table-container {
   display: flex;
 }
+
+@media screen and (min-width: 1024px) {
+  .table-container {
+    justify-content: space-around;
+  }
+
+  #root > div > div.table-container > div {
+    width: 50%;
+  }
+  #root > div > div.table-container > div:nth-child(1) {
+    width: 450px;
+  }
+
+  .table-container > div:nth-child(1) > table > tbody {
+    width: 100%;
+  }
+
+  .product-details {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #root > div > div.table-container > div:nth-child(2) {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .table-container > div:nth-child(2) > div {
+    width: 80%;
+  }
+
+  #root
+    > div
+    > div.table-container
+    > div:nth-child(2)
+    > div
+    > div
+    > div
+    > form {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .table-container {
+    justify-content: space-evenly;
+  }
+
+  #root > div > div.table-container > div {
+    width: 500px;
+  }
+  #root > div > div.table-container > div:nth-child(1) {
+    width: 1050px;
+  }
+
+  .table-container > div:nth-child(1) > table > tbody {
+    width: 100%;
+  }
+
+  .product-details {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #root > div > div.table-container > div:nth-child(2) {
+    width: 600px;
+  }
+
+  .table-container > div:nth-child(2) > div {
+    width: 450px;
+  }
+
+  #root
+    > div
+    > div.table-container
+    > div:nth-child(2)
+    > div
+    > div
+    > div
+    > form {
+    width: 400px;
+  }
+}

@@ -24,7 +24,7 @@ function Basket() {
   const product = items.map((entry) => {
     console.log("🚀 ~ file: Basket.jsx ~ line 10 ~ product ~ entry", entry);
     return (
-      <div>
+      <div className="master-card-container">
         <div className="cart-container">
           <div className="booking-title" key={entry.id}>
             <div>

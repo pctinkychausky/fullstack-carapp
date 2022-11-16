@@ -1,8 +1,10 @@
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
-  height: 100%;
 }
 
-.footer {
-  height: 200%;
+#root > div > div:nth-child(1) > div.footer > footer {
+  /* position: fixed; */
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }

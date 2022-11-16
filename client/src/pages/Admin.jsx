@@ -7,7 +7,6 @@ import CarForm from "./Cars/CarForm";
 function Admin() {
   const style = {
     display: "flex",
-    justifyContent: "space-evenly",
   };
   return (
     <>

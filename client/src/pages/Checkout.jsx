@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/narbar/Narbar";
 import Basket from "../components/basket/Basket";
 import Button from "@mui/material/Button";
 import { NavLink } from "react-router-dom";
 import "./checkout.css";
+import { BasketContext } from "../contexts/basket.context";
 
 function Checkout() {
+  const { reset } = useContext(BasketContext);
   // let { id } = useParams();
 
   // const { cars, loaded, fetchCars } = useContext(CarsContext);
@@ -29,7 +31,14 @@ function Checkout() {
         <div className="update-header">
           <h2>Checkout Basket</h2>
           <NavLink to="/carhire">
-            <Button variant="outlined" type="submit">
+            <Button
+              variant="outlined"
+              type="submit"
+              onClick={() => {
+                console.log("testeeeeeeeeeeeee");
+                reset();
+              }}
+            >
               Back
             </Button>
           </NavLink>

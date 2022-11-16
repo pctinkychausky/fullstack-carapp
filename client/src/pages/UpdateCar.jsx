@@ -35,7 +35,7 @@ function UpdateProducts() {
             <NavLink to="/admin">
               <Button variant="outlined" type="submit">
                 Back
-              </Button>{" "}
+              </Button>
             </NavLink>
           )}
         </div>

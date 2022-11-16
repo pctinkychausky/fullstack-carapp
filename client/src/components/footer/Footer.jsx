@@ -179,7 +179,7 @@ function Footer() {
         >
           © 2022 Copyright:
           <a className="text-white" href="https://mdbootstrap.com/">
-            Economy Car Hire Ltd t/a Zest Car Rental
+            Economy Car Hire Ltd t/a Rental.com
           </a>
         </div>
       </MDBFooter>

@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   padding-block: 30px;
-  width: 30%;
+
   margin-inline: auto;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   color: #2d294b;
@@ -50,4 +50,22 @@
 
 .booking-details-title {
   font-weight: bold;
+}
+
+@media screen and (min-width: 1024px) {
+  .cart-container {
+    width: 70%;
+  }
+  .master-card-container {
+    margin-top: 5%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .cart-container {
+    width: 30%;
+  }
+  .master-card-container {
+    margin-top: 2%;
+  }
 }
