@@ -1,8 +1,6 @@
-import React, { createContext, useState, useCallback, useContext } from "react";
+import React, { createContext, useState, useCallback } from "react";
 // import { AuthContext } from "./auth.context";
-import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
-import { BasketContext } from "../contexts/basket.context";
 
 let headers = {
   "Content-Type": "application/json",

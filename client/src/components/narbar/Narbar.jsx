@@ -12,8 +12,6 @@ import ReactCountryFlag from "react-country-flag";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import "./navbar.css";
 import { NavLink } from "react-router-dom";
-import LoginButton from "../loginButton/LoginButton";
-import LogoutButton from "../logoutButton/LogoutButton";
 import LoginIcon from "../loginIcon/LoginIcon";
 
 function Narbar() {

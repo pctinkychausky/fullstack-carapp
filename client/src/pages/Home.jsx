@@ -16,7 +16,7 @@ function Carhire() {
       fetchCars();
       fetchOrders();
     }
-  }, []);
+  }, [fetchCars, fetchOrders, loaded]);
 
   return (
     <>

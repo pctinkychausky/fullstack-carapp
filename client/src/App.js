@@ -12,7 +12,6 @@ import { CarsProvider } from "./contexts/cars.context";
 import { BasketProvider } from "./contexts/basket.context";
 import { OrdersProvider } from "./contexts/orders.context";
 // Cars
-import CarList from "./pages/Cars/CarList";
 import AddCar from "./pages/Cars/AddCar";
 import UpdateCar from "./pages/UpdateCar";
 import DeleteCar from "./pages/Cars/DeleteCar";
@@ -24,7 +23,7 @@ import Orders from "./pages/Orders";
 import AdminRoute from "./components/SecuredRoute/AdminRoute";
 
 // OrderPermission,
-import { ProductPermission } from "./utils/constants";
+// import { ProductPermission } from "./utils/constants";
 
 function App() {
   return (

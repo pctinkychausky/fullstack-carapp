@@ -1,6 +1,6 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { Auth0Provider, withAuthenticationRequired } from "@auth0/auth0-react";
+import { Navigate } from "react-router-dom";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const PrivateRoute = ({ component, children, ...props }) => {
@@ -8,7 +8,7 @@ const PrivateRoute = ({ component, children, ...props }) => {
   const { user } = useAuth0();
   if (user) {
     const role = user["http://localhost:3000/roles"];
-    if (role == "admin" || "juniorStaff") {
+    if (role === "admin" || "juniorStaff") {
       authd = true;
     }
   }

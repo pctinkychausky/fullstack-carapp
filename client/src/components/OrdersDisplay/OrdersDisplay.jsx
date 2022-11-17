@@ -3,21 +3,12 @@ import "./ordersDisplay.css";
 import { OrdersContext } from "../../contexts/orders.context";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Loading from "../loading/Loading";
 
 // import { formatPrice } from "./../../utils/utils";
 
 function OrdersDisplay() {
-  const {
-    orders,
-    loaded,
-    fetchOrders,
-    loading,
-    error,
-    addOrder,
-    updateOrder,
-    deleteOrder,
-  } = useContext(OrdersContext);
+  const { orders, loaded, fetchOrders, loading, error, deleteOrder } =
+    useContext(OrdersContext);
 
   // console.log("orders", orders);
 

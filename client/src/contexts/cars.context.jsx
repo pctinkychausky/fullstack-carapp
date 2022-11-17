@@ -72,6 +72,8 @@ export const CarsProvider = (props) => {
       setLoading(false);
     }
   }, [
+    CARS_ENDPOINT,
+    cars,
     setError,
     setLoading,
     setCars,
@@ -232,6 +234,8 @@ export const CarsProvider = (props) => {
       }
     },
     [
+      CARS_ENDPOINT,
+      cars,
       setError,
       setLoading,
       setCars,

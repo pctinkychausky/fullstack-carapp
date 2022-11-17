@@ -6,14 +6,13 @@ import Loading from "../../components/loading/Loading";
 
 function CarList() {
   const navigate = useNavigate();
-  const { cars, loading, loaded, error, fetchCars, deleteCar, EditHandler } =
-    useContext(CarsContext);
+  const { cars, loaded, fetchCars, deleteCar } = useContext(CarsContext);
 
   useEffect(() => {
     if (!loaded) {
       fetchCars();
     }
-  }, []);
+  }, [fetchCars, loaded]);
 
   return (
     <>

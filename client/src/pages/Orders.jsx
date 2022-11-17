@@ -8,7 +8,7 @@ import "./orders.css";
 
 function Checkout() {
   return (
-    <div>
+    <div className="order-page">
       <Navbar />
       <main className="order-container">
         <div className="update-header">

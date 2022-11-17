@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import "./basket.css";
 import { BasketContext } from "../../contexts/basket.context";
 import { OrdersContext } from "../../contexts/orders.context";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import localForage from "localforage";
+// import localForage from "localforage";
 import { NavLink } from "react-router-dom";
 
 function Basket() {
