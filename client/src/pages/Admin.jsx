@@ -11,7 +11,7 @@ function Admin() {
   return (
     <>
       <Navbar />
-      <h1 style={{ marginTop: 40 }}>Invetory List</h1>
+      <h1 style={{ marginTop: 40 }}>Inventory List</h1>
       <div className="table-container" style={style}>
         <CarList />
         <div>
