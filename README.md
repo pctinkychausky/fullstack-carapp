@@ -9,6 +9,6 @@ Backend was built by Node.js and Express.js to interact with the RESTful API end
 Databases use MongoDB atlas and mongoose for modeling. 
 Deployment: Heroku 
 
-+ ##Customer login: your google account or create your own through the website.
-+ ##Junior admin login: junioradmin@abc.com password: Password123  (with permission to read, add, update cars) 
-+ ##Senior admin login: senioradmin@abc.com password: Password123 (with extra permission to delete cars) 
++ Customer login: your google account or create your own through the website.
++ Junior admin login: junioradmin@abc.com password: Password123  (with permission to read, add, update cars) 
++ Senior admin login: senioradmin@abc.com password: Password123 (with extra permission to delete cars) 
