@@ -1,5 +1,5 @@
 App: Fullstack MongoDB Express React Node.js App – car rental.com   
-Link: https://fullstack-mern-car-rental.herokuapp.com/
+Link: https://lively-sunset-1722.fly.dev/
 Skills: React | Hooks | Express | OAuth | MongoDB | Node 
 
 This is a car rental app for customers to hire cars (login,select cars, checkout,place order) and admin to update the inventory and orders through the admin page.
