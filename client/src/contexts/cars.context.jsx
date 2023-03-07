@@ -36,6 +36,11 @@ export const CarsProvider = (props) => {
 
   const CARS_ENDPOINT = `${window.location.origin}/api/v1/cars/`;
 
+  console.log(
+    "🚀 ~ file: cars.context.jsx:39 ~ CarsProvider ~ CARS_ENDPOINT:",
+    CARS_ENDPOINT
+  );
+
   const filteredCars = filterCity
     ? cars.filter((car) =>
         car.City.toLowerCase().includes(filterCity.toLowerCase())
@@ -49,6 +54,7 @@ export const CarsProvider = (props) => {
   const fetchCars = useCallback(async () => {
     // console.log('loading', loading);
     // console.log('error', error);
+
     console.log("hello");
     if (loading || loaded || error) {
       return;

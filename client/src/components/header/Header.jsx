@@ -17,6 +17,10 @@ function Header() {
 
   const navigate = useNavigate();
 
+  console.log(
+    "🚀 ~ file: Header.jsx:15 ~ Header ~ availableCities:",
+    availableCities
+  );
   // const startDate = `${format(selectedDate[0].startDate, "MM/dd/yyyy")}`;
   // const endDate = `${format(selectedDate[0].endDate, "MM/dd/yyyy")}`;
 
