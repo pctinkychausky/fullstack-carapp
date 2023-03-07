@@ -6,7 +6,7 @@ import findConfig from "find-config";
 
 dotenv.config({ path: findConfig(".env") });
 
-const { PORT = 6001 } = process.env;
+const { PORT = 8080 } = process.env;
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 global.__basedir = __dirname; // Make a reference to your project's base directory
