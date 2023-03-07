@@ -34,8 +34,8 @@ export const CarsProvider = (props) => {
   //auth0
   const { getAccessTokenSilently } = useAuth0();
 
-  const CARS_ENDPOINT = `${window.location.origin}/api/v1/cars/`;
-
+  // const CARS_ENDPOINT = `${window.location.origin}/api/v1/cars/`;
+  const CARS_ENDPOINT = `/api/v1/cars/`;
   console.log(
     "🚀 ~ file: cars.context.jsx:39 ~ CarsProvider ~ CARS_ENDPOINT:",
     CARS_ENDPOINT
