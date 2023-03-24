@@ -19,6 +19,8 @@ This app was deployed to Fly.io using **Docker** technology for containerized ar
 
 **Solution**/ New verison: Fly.io's containerized architecture built based on Docker containers allow the app run in a highly efficient and scalable manner. We can now access to the app immediately without any delay.
 
+
+**Login**
 + Customer login: your google account or create your own through the website.
 + Junior admin login: junioradmin@abc.com password: Password123  (with permission to read, add, update cars) 
 + Senior admin login: senioradmin@abc.com password: Password123 (with extra permission to delete cars) 
