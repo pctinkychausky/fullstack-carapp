@@ -3,10 +3,13 @@ Link: https://lively-sunset-1722.fly.dev/
 Skills: React | Docker | Hooks | Express | OAuth | MongoDB | Node 
 
 This is a car rental app for customers to hire cars (login,select cars, checkout,place order) and admin to update the inventory and orders through the admin page.
-  **Frontend** was built by advanced CSS (eg flexbox and grid),HTML, Javascript, React, React Hooks and libraries like MaterialUI. 
+  
+**Frontend** was built by advanced CSS (eg flexbox and grid),HTML, Javascript, React, React Hooks and libraries like MaterialUI. 
 SSO and authorization were created by OAuth. 
-  **Backend** was built by Node.js and Express.js to interact with the RESTful API endpoints for CRUD. 
-  **Databases** use MongoDB atlas and mongoose for modeling. 
+  
+**Backend** was built by Node.js and Express.js to interact with the RESTful API endpoints for CRUD. 
+  
+**Databases** use MongoDB atlas and mongoose for modeling. 
 
 This app was deployed to Fly.io using **Docker** technology for containerized architecture that enables fast and efficient scaling.
 
